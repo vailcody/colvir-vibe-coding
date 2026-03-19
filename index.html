@@ -874,6 +874,44 @@
                 scroll-behavior: auto;
             }
         }
+
+        /* ===========================================
+           TWEET SCREENSHOT SLIDE
+           =========================================== */
+        .slide-tweet {
+            align-items: center;
+        }
+        .tweet-container {
+            max-width: 700px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            margin-top: 1.5rem;
+        }
+        .tweet-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ===========================================
+           PHRASE SLIDES — large centered bold text
+           =========================================== */
+        .slide-phrase {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .phrase-text {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
     </style>
 </head>
 <body>
@@ -931,24 +969,42 @@
     </section>
 
     <!-- ===========================================
-         SLIDE 3 — ЧТО ТАКОЕ ВАЙБ-КОДИНГ
+         SLIDE 3 — ЧТО ТАКОЕ ВАЙБ-КОДИНГ (TWEET)
          =========================================== -->
-    <section class="slide slide-3" data-slide="3">
-        <div class="geo-line"></div>
-        <div class="geo-square"></div>
+    <section class="slide slide-3 slide-tweet" data-slide="3">
         <span class="slide-number reveal">03</span>
         <h2 class="reveal">Что такое вайб-кодинг?</h2>
-        <p class="reveal" style="font-size: clamp(1.2rem, 2.2vw, 1.6rem); max-width: 100%; line-height: 1.6; margin-bottom: 1rem;">
-            Описываешь что хочешь на естественном языке &mdash; ИИ-агент пишет код
-        </p>
-        <blockquote class="quote reveal">
-            &laquo;Вы не пишете код &mdash; вы описываете вайб, а ИИ его реализует&raquo;
-            <span class="quote-author">&mdash; Андрей Карпаты, ex-OpenAI</span>
-        </blockquote>
-        <ul class="content-list stagger-list" style="margin-top: 1rem;">
-            <li>Для разработчиков: ускорение в 5-10x</li>
-            <li>Для не-разработчиков: создание рабочих прототипов</li>
-        </ul>
+        <div class="tweet-container reveal">
+            <img src="karpathy-tweet.jpg" alt="Andrej Karpathy tweet about vibe coding" class="tweet-img">
+        </div>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 3a — ВИЖУ ЧТО-ТО
+         =========================================== -->
+    <section class="slide slide-phrase" data-slide="3a">
+        <h2 class="phrase-text reveal">Вижу что-то</h2>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 3b — ГОВОРЮ ЧТО-ТО
+         =========================================== -->
+    <section class="slide slide-phrase" data-slide="3b">
+        <h2 class="phrase-text reveal">Говорю что-то</h2>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 3c — ЗАПУСКАЮ ЧТО-ТО
+         =========================================== -->
+    <section class="slide slide-phrase" data-slide="3c">
+        <h2 class="phrase-text reveal">Запускаю что-то</h2>
+    </section>
+
+    <!-- ===========================================
+         SLIDE 3d — И ЭТО В ОСНОВНОМ РАБОТАЕТ
+         =========================================== -->
+    <section class="slide slide-phrase" data-slide="3d">
+        <h2 class="phrase-text reveal">И это в основном<br>работает&hellip;</h2>
     </section>
 
     <!-- ===========================================
