@@ -27,7 +27,7 @@
             --font-display: 'Archivo', sans-serif;
             --font-body: 'Nunito', sans-serif;
 
-            --slide-padding: clamp(2rem, 5vw, 5rem);
+            --slide-padding: clamp(2rem, 4vw, 3.5rem);
             --duration: 0.35s;
             --ease: cubic-bezier(0.25, 1, 0.5, 1);
         }
@@ -156,7 +156,7 @@
         }
 
         h2 {
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 6vw, 5rem);
             margin-bottom: 1.5rem;
         }
 
@@ -168,7 +168,7 @@
 
         .subtitle {
             font-family: var(--font-body);
-            font-size: clamp(1rem, 2.5vw, 1.6rem);
+            font-size: clamp(1.2rem, 3vw, 2rem);
             font-weight: 400;
             color: var(--text-secondary);
             letter-spacing: 0;
@@ -178,7 +178,7 @@
 
         .meta {
             font-family: var(--font-body);
-            font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+            font-size: clamp(1.2rem, 2.2vw, 1.6rem);
             color: var(--text-secondary);
             margin-top: 1.5rem;
             letter-spacing: 0.05em;
@@ -191,11 +191,11 @@
         .content-list {
             list-style: none;
             padding: 0;
-            max-width: 800px;
+            max-width: 100%;
         }
 
         .content-list li {
-            font-size: clamp(1rem, 1.8vw, 1.25rem);
+            font-size: clamp(1.2rem, 2.2vw, 1.6rem);
             line-height: 1.6;
             padding: 0.6rem 0;
             padding-left: 1.5rem;
@@ -217,12 +217,12 @@
         .quote {
             font-family: var(--font-display);
             font-weight: 700;
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
             line-height: 1.4;
             border-left: 4px solid var(--accent);
             padding-left: 1.5rem;
             margin: 1.5rem 0;
-            max-width: 700px;
+            max-width: 100%;
             color: var(--text-primary);
         }
 
@@ -242,7 +242,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
-            max-width: 900px;
+            max-width: 100%;
             margin-top: 1.5rem;
         }
 
@@ -260,13 +260,13 @@
 
         .card h3 {
             text-transform: uppercase;
-            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            font-size: clamp(1.1rem, 1.8vw, 1.35rem);
             margin-bottom: 0.75rem;
             letter-spacing: 0.05em;
         }
 
         .card p, .card ul {
-            font-size: clamp(0.85rem, 1.3vw, 1rem);
+            font-size: clamp(1rem, 1.6vw, 1.2rem);
             color: var(--text-secondary);
             line-height: 1.5;
         }
@@ -299,7 +299,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            max-width: 900px;
+            max-width: 100%;
             margin-top: 1.5rem;
         }
 
@@ -318,14 +318,14 @@
         .cost-card .cost-level {
             font-family: var(--font-display);
             font-weight: 800;
-            font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+            font-size: clamp(0.9rem, 1.5vw, 1.15rem);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-bottom: 0.5rem;
         }
 
         .cost-card .cost-label {
-            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            font-size: clamp(1.2rem, 2.2vw, 1.6rem);
             font-weight: 700;
             font-family: var(--font-display);
         }
@@ -355,10 +355,10 @@
         .cost-message {
             font-family: var(--font-display);
             font-weight: 800;
-            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-size: clamp(1.2rem, 2.5vw, 1.7rem);
             text-transform: uppercase;
             margin-top: 2rem;
-            max-width: 900px;
+            max-width: 100%;
         }
 
         /* ===========================================
@@ -368,7 +368,7 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            max-width: 700px;
+            max-width: 100%;
             margin-top: 1.5rem;
         }
 
@@ -381,7 +381,7 @@
         .step-number {
             font-family: var(--font-display);
             font-weight: 900;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(3rem, 6vw, 5rem);
             line-height: 1;
             color: var(--accent);
             flex-shrink: 0;
@@ -389,7 +389,7 @@
         }
 
         .step-text {
-            font-size: clamp(1rem, 1.8vw, 1.25rem);
+            font-size: clamp(1.2rem, 2.2vw, 1.6rem);
             padding-top: 0.5rem;
             line-height: 1.5;
         }
@@ -401,7 +401,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            max-width: 800px;
+            max-width: 100%;
             margin-top: 1.5rem;
         }
 
@@ -531,7 +531,7 @@
             display: flex;
             align-items: center;
             gap: clamp(2rem, 5vw, 4rem);
-            max-width: 900px;
+            max-width: 100%;
         }
         .author-photo {
             flex-shrink: 0;
@@ -549,13 +549,13 @@
         }
         .author-info h2 {
             font-family: var(--font-display);
-            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-size: clamp(2rem, 3.5vw, 3rem);
             font-weight: 800;
             color: var(--text-primary);
         }
         .author-bio {
             font-family: var(--font-body);
-            font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+            font-size: clamp(1.05rem, 1.8vw, 1.3rem);
             color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 0.5rem;
@@ -938,7 +938,7 @@
         <div class="geo-square"></div>
         <span class="slide-number reveal">03</span>
         <h2 class="reveal">Что такое вайб-кодинг?</h2>
-        <p class="reveal" style="font-size: clamp(1rem, 1.8vw, 1.25rem); max-width: 700px; line-height: 1.6; margin-bottom: 1rem;">
+        <p class="reveal" style="font-size: clamp(1.2rem, 2.2vw, 1.6rem); max-width: 100%; line-height: 1.6; margin-bottom: 1rem;">
             Описываешь что хочешь на естественном языке &mdash; ИИ-агент пишет код
         </p>
         <blockquote class="quote reveal">
