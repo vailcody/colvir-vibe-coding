@@ -526,6 +526,60 @@
             top: 15%; right: 5%;
         }
 
+        /* Author layout */
+        .author-layout {
+            display: flex;
+            align-items: center;
+            gap: clamp(2rem, 5vw, 4rem);
+            max-width: 900px;
+        }
+        .author-photo {
+            flex-shrink: 0;
+            width: clamp(180px, 22vw, 280px);
+            height: clamp(180px, 22vw, 280px);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 3px solid var(--accent);
+        }
+        .author-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .author-info h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .author-bio {
+            font-family: var(--font-body);
+            font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        .author-bio a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .author-bio a:hover {
+            border-bottom-color: var(--accent);
+        }
+        @media (max-width: 768px) {
+            .author-layout {
+                flex-direction: column;
+                text-align: center;
+            }
+            .author-photo {
+                width: 160px;
+                height: 160px;
+            }
+        }
+
         .slide-2 .geo-square {
             width: 60px; height: 60px;
             top: 8%; right: 20%;
@@ -857,13 +911,23 @@
     <section class="slide slide-2" data-slide="2">
         <div class="geo-square"></div>
         <span class="slide-number reveal">02</span>
-        <h2 class="reveal">Обо мне</h2>
-        <ul class="content-list stagger-list">
-            <li>15+ лет в разработке: фрилансер &rarr; веб-студия &rarr; ведущий инженер &rarr; CTO &rarr; ex-Сбер</li>
-            <li>Обучал вайб-кодингу: Яндекс, СберУниверситет, Синергия, Правительство МО</li>
-            <li>Telegram: &laquo;Вайб-кодинг по Чуйкову&raquo; &mdash; 4 000+ подписчиков</li>
-            <li>2 потока курса завершены, 3-й в продаже</li>
-        </ul>
+        <div class="author-layout reveal">
+            <div class="author-photo">
+                <img src="author.jpg" alt="Константин Чуйков">
+            </div>
+            <div class="author-info">
+                <h2 style="margin-bottom: 0.6rem;">Константин Чуйков</h2>
+                <p class="author-bio">
+                    Автор канала <a href="https://t.me/vibe_coding" target="_blank">&laquo;Вайб-кодинг по Чуйкову&raquo;</a> и лидер сообщества <a href="https://t.me/vibe_coding_community" target="_blank">Vibe Coding Community</a>.
+                </p>
+                <p class="author-bio">
+                    15 лет в IT. Прошел путь от фрилансера и фаундера веб-студии, до СТО в стартапе и руководителя разработки в бигтехе.
+                </p>
+                <p class="author-bio">
+                    Проводил обучение вайб-кодингу в Яндекс, СберУниверситет, Синергии и Правительстве МО.
+                </p>
+            </div>
+        </div>
     </section>
 
     <!-- ===========================================
