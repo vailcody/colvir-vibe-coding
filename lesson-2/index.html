@@ -846,31 +846,31 @@
     <section class="slide" data-slide="7">
         <span class="slide-number reveal">07</span>
         <h2 class="reveal">Почему Cursor — #1</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Что делает его лучшим инструментом для AI-разработки</p>
+        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Что делает его лидером AI-разработки в 2026</p>
         <div class="card-grid">
             <div class="card highlighted">
-                <h3>Семантический поиск</h3>
-                <p>Индексирует весь проект. @codebase — поиск по смыслу, не по подстрокам. «Где обрабатываются платежи?» → находит нужные файлы.</p>
+                <h3>Семантический индекс</h3>
+                <p>Индексирует весь проект и ищет по смыслу. Копилот видит 3-5 файлов — Cursor видит всё. Ключевое преимущество над расширениями.</p>
             </div>
             <div class="card">
-                <h3>Privacy Mode</h3>
-                <p>Код не хранится на серверах Cursor. Для банковского софта — критично. Business-тариф + SOC 2 Type II.</p>
+                <h3>Privacy &amp; SOC 2</h3>
+                <p>Код не хранится на серверах. Business-тариф + SOC 2 Type II. Для банковского софта — must have.</p>
             </div>
             <div class="card">
-                <h3>Rules &amp; Skills</h3>
-                <p>.cursor/rules — правила проекта. AI запоминает ваш стек, стиль кода, архитектурные решения. Работает автоматически в каждом чате.</p>
+                <h3>Rules, Skills, Hooks</h3>
+                <p>.cursor/rules — стек, стиль, архитектура. SKILL.md — переиспользуемые навыки. Hooks — автоматические действия после генерации кода.</p>
             </div>
             <div class="card">
-                <h3>4 режима работы</h3>
-                <p>Ask → Plan → Agent → Edit. От исследования до точечной правки. Каждый оптимален для своей задачи.</p>
+                <h3>Subagents &amp; Cloud Agents</h3>
+                <p>Параллельные вложенные агенты для больших задач. Cloud agents работают часами автономно, создают ветки, гоняют CI.</p>
             </div>
             <div class="card">
-                <h3>YOLO Mode</h3>
-                <p>Agent сам запускает терминал: пишет код → запускает → видит ошибку → чинит. Полный цикл без вашего участия.</p>
+                <h3>Automations (март 2026)</h3>
+                <p>Фоновые агенты на триггерах: Slack, Linear, GitHub, PagerDuty. Ревью безопасности, патчинг зависимостей, мониторинг дрифта — автоматически.</p>
             </div>
             <div class="card">
-                <h3>MCP + интеграции</h3>
-                <p>Подключаете БД, API, Figma, браузер. Агент не просто пишет — проверяет результат в реальном окружении.</p>
+                <h3>Plugins &amp; Marketplace</h3>
+                <p>30+ интеграций: Figma, Stripe, Datadog, Atlassian, PlanetScale. Плагины — MCP-серверы с контролем доступа. Работает и в JetBrains.</p>
             </div>
         </div>
     </section>
@@ -880,23 +880,32 @@
          ======================================= -->
     <section class="slide" data-slide="8">
         <span class="slide-number reveal">08</span>
-        <h2 class="reveal">Режимы работы</h2>
-        <div class="mode-grid">
-            <div class="mode-card">
-                <span class="mode-emoji">💬</span>
-                <h3>Ask</h3>
-                <p>Вопрос-ответ. Объяснить код, найти баг, предложить архитектуру. Не меняет файлы.</p>
+        <h2 class="reveal">5 режимов работы</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Каждый оптимален для своей задачи</p>
+        <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="card">
+                <h3>💬 Ask</h3>
+                <p>Read-only. Исследуй код, задавай вопросы, планируй изменения. Всегда начинай с Ask перед сложной задачей.</p>
             </div>
-            <div class="mode-card active-mode">
-                <span class="mode-emoji">🤖</span>
-                <h3>Agent</h3>
-                <p>Автономный агент. Сам читает файлы, пишет код, запускает команды в терминале. Основной режим для вайб-кодинга.</p>
+            <div class="card">
+                <h3>📋 Plan</h3>
+                <p>Декомпозиция фичи. Исследует кодовую базу, генерирует план, рисует Mermaid-диаграммы. Редактируй план до реализации.</p>
             </div>
-            <div class="mode-card">
-                <span class="mode-emoji">✏️</span>
-                <h3>Edit</h3>
-                <p>Точечное редактирование. Выделяешь код → описываешь изменение. Быстро и экономно по токенам.</p>
+            <div class="card highlighted">
+                <h3>🤖 Agent</h3>
+                <p>Основной режим. Автономно читает, пишет, запускает терминал. Пишет код → тестирует → видит ошибку → чинит.</p>
             </div>
+            <div class="card">
+                <h3>🐛 Debug</h3>
+                <p>Инструментирует логи, анализирует root cause. Работает со всеми стеками. Выручает когда ошибка непонятная.</p>
+            </div>
+            <div class="card">
+                <h3>✏️ Edit</h3>
+                <p>⌘K — точечная правка. Выделил → описал → применил. Не трогает другие файлы. Экономно по токенам.</p>
+            </div>
+        </div>
+        <div class="quote reveal" style="margin-top: 1.5rem;">
+            Золотой воркфлоу: Ask → Plan → Agent → Ask (проверка)
         </div>
     </section>
 
