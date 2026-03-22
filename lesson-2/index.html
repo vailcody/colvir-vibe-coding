@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вайб-кодинг — Занятие 2: Оживляем прототип</title>
+
+    <!-- Google Fonts: Archivo (display) + Nunito (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES — SWISS MODERN THEME
+           Identical to Lesson 1
+           =========================================== */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7f7f7;
+            --text-primary: #000000;
+            --text-secondary: #555555;
+            --accent: #ff3300;
+            --grid: rgba(0, 0, 0, 0.05);
+
+            --font-display: 'Archivo', sans-serif;
+            --font-body: 'Nunito', sans-serif;
+
+            --slide-padding: clamp(2rem, 4vw, 3.5rem);
+            --duration: 0.35s;
+            --ease: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* === RESET & BASE === */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-snap-type: y mandatory; overflow-x: hidden; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === GRID OVERLAY === */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* === PROGRESS BAR === */
+        .progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            background: var(--accent);
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.3s linear;
+        }
+
+        /* === NAVIGATION DOTS === */
+        .nav-dots {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 999;
+        }
+        .nav-dot {
+            width: 10px; height: 10px;
+            border: 2px solid var(--text-primary);
+            background: transparent;
+            cursor: pointer;
+            transition: background var(--duration) var(--ease), transform var(--duration) var(--ease);
+            padding: 0;
+        }
+        .nav-dot.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: scale(1.3);
+        }
+        .nav-dot:hover { border-color: var(--accent); }
+
+        /* === SLIDE CONTAINER === */
+        .slide {
+            min-height: 100vh;
+            padding: var(--slide-padding);
+            padding-right: 4rem;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .slide:nth-child(even) { background: var(--bg-secondary); }
+
+        /* === TYPOGRAPHY === */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+        h1 { font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 900; }
+        h2 { font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 1.5rem; }
+        h3 {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .subtitle {
+            font-family: var(--font-body);
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-transform: none;
+            margin-top: 0.5rem;
+        }
+        .meta {
+            font-family: var(--font-body);
+            font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* === CONTENT LIST === */
+        .content-list {
+            list-style: none;
+            padding: 0;
+            max-width: 100%;
+        }
+        .content-list li {
+            font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+            line-height: 1.6;
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-primary);
+        }
+        .content-list li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 50%;
+            width: 8px; height: 8px;
+            background: var(--accent);
+            transform: translateY(-50%);
+        }
+
+        /* === QUOTE === */
+        .quote {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            line-height: 1.4;
+            border-left: 4px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            max-width: 100%;
+        }
+
+        /* === CARD GRIDS === */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 100%;
+            margin-top: 1.5rem;
+        }
+        .card {
+            background: var(--bg-primary);
+            border: 2px solid var(--text-primary);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .slide:nth-child(even) .card { background: var(--bg-secondary); }
+        .card h3 {
+            text-transform: uppercase;
+            font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        .card p, .card ul {
+            font-size: clamp(1rem, 1.6vw, 1.2rem);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .card ul { list-style: none; padding: 0; }
+        .card ul li { padding: 0.2rem 0; }
+        .card.highlighted { border-color: var(--accent); }
+        .card.highlighted::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: var(--accent);
+        }
+
+        /* 3-column cards */
+        .card-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        /* === STEPS === */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 100%;
+            margin-top: 1.5rem;
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .step-number {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1;
+            color: var(--accent);
+            flex-shrink: 0;
+            min-width: 80px;
+        }
+        .step-text {
+            font-size: clamp(1.4rem, 2.8vw, 2rem);
+            line-height: 1.4;
+        }
+        .step-desc {
+            font-size: clamp(1rem, 1.6vw, 1.2rem);
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-top: 0.3rem;
+        }
+
+        /* === CENTERED DRAMATIC TEXT === */
+        .center-slide {
+            align-items: center;
+            text-align: center;
+        }
+        .dramatic {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(5rem, 15vw, 14rem);
+            line-height: 0.95;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+        }
+
+        /* === PHRASE SLIDES === */
+        .slide-phrase {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .phrase-text {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 7vw, 6rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        /* === GEOMETRIC DECORATIONS === */
+        .geo-square {
+            position: absolute;
+            background: var(--accent);
+            z-index: -1;
+        }
+        .geo-line {
+            position: absolute;
+            background: var(--text-primary);
+            z-index: -1;
+        }
+        .geo-outline {
+            position: absolute;
+            border: 2px solid var(--text-primary);
+            z-index: -1;
+        }
+
+        /* === SLIDE NUMBER === */
+        .slide-number {
+            position: absolute;
+            top: var(--slide-padding);
+            left: var(--slide-padding);
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* === KEYBOARD HINT === */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            z-index: 999;
+            opacity: 1;
+            transition: opacity 1s ease;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .keyboard-hint.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* === BIG TEXT === */
+        .big-text {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(3rem, 8vw, 7rem);
+            text-transform: uppercase;
+            margin-top: 2rem;
+            color: var(--accent);
+        }
+
+        /* === FLOW DIAGRAM === */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        .flow-node {
+            background: var(--bg-secondary);
+            border: 2px solid var(--text-primary);
+            padding: 1rem 1.5rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .flow-node.highlighted {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .flow-arrow {
+            font-size: 1.8rem;
+            color: var(--accent);
+            font-weight: 900;
+        }
+
+        /* === CODE BLOCK === */
+        .code-block {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: clamp(0.85rem, 1.4vw, 1.1rem);
+            line-height: 1.7;
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            max-width: 100%;
+        }
+        .code-block .keyword { color: #ff7b72; }
+        .code-block .string { color: #a5d6ff; }
+        .code-block .comment { color: #8b949e; }
+        .code-block .func { color: #d2a8ff; }
+
+        /* === MODE CARDS === */
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .mode-card {
+            background: var(--bg-primary);
+            border: 2px solid var(--text-primary);
+            padding: 1.5rem;
+            position: relative;
+        }
+        .slide:nth-child(even) .mode-card { background: var(--bg-secondary); }
+        .mode-card h3 {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .mode-card .mode-emoji {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .mode-card p {
+            font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .mode-card.active-mode {
+            border-color: var(--accent);
+        }
+        .mode-card.active-mode::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: var(--accent);
+        }
+
+        /* === SHORTCUT TABLE === */
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 0;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 10px;
+            overflow: hidden;
+            max-width: 800px;
+        }
+        .shortcut-key, .shortcut-desc {
+            padding: 0.8rem 1.2rem;
+            font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .shortcut-key {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-weight: 700;
+            background: var(--bg-secondary);
+            color: var(--accent);
+        }
+        .shortcut-desc {
+            color: var(--text-secondary);
+        }
+
+        /* === STRATEGY CARDS === */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .strategy-card {
+            background: var(--bg-primary);
+            border: 2px solid var(--text-primary);
+            padding: 1.5rem;
+        }
+        .slide:nth-child(even) .strategy-card { background: var(--bg-secondary); }
+        .strategy-card .strategy-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .strategy-card h3 {
+            font-family: var(--font-display);
+            font-size: clamp(1rem, 1.6vw, 1.25rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .strategy-card p {
+            font-size: clamp(0.85rem, 1.3vw, 1.05rem);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* === PLAN GRID (from lesson 1) === */
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .plan-col {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 10px;
+            padding: 1.2rem 1.4rem;
+        }
+        .plan-col-active { border: 2px solid var(--accent); }
+        .plan-col h3 {
+            font-family: var(--font-display);
+            font-size: clamp(0.9rem, 1.4vw, 1.15rem);
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+        }
+        .plan-hours {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 0.8em;
+            color: var(--text-secondary);
+        }
+        .plan-col h4 {
+            font-family: var(--font-display);
+            font-size: clamp(0.8rem, 1.2vw, 1rem);
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+        .plan-col ul { list-style: none; padding: 0; margin: 0; }
+        .plan-col ul li {
+            font-family: var(--font-body);
+            font-size: clamp(0.65rem, 1vw, 0.8rem);
+            color: var(--text-secondary);
+            line-height: 1.5;
+            padding: 0.15rem 0 0.15rem 0.8rem;
+            position: relative;
+        }
+        .plan-col ul li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0.55rem;
+            width: 4px; height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        .plan-hw {
+            margin-top: 0.8rem;
+            padding-top: 0.6rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            font-family: var(--font-body);
+            font-size: clamp(0.65rem, 1vw, 0.8rem);
+            color: var(--text-secondary);
+        }
+        .plan-hw strong { color: var(--text-primary); }
+
+        /* === ANIMATIONS === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+        }
+        .slide.visible .reveal,
+        .slide.visible .reveal-left,
+        .slide.visible .reveal-scale {
+            opacity: 1;
+            transform: none;
+        }
+        .slide.visible .reveal:nth-child(1),
+        .slide.visible .reveal-left:nth-child(1) { transition-delay: 0.05s; }
+        .slide.visible .reveal:nth-child(2),
+        .slide.visible .reveal-left:nth-child(2) { transition-delay: 0.12s; }
+        .slide.visible .reveal:nth-child(3),
+        .slide.visible .reveal-left:nth-child(3) { transition-delay: 0.19s; }
+        .slide.visible .reveal:nth-child(4),
+        .slide.visible .reveal-left:nth-child(4) { transition-delay: 0.26s; }
+        .slide.visible .reveal:nth-child(5) { transition-delay: 0.33s; }
+        .slide.visible .reveal:nth-child(6) { transition-delay: 0.40s; }
+
+        .stagger-list li {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+        }
+        .slide.visible .stagger-list li { opacity: 1; transform: none; }
+        .slide.visible .stagger-list li:nth-child(1) { transition-delay: 0.1s; }
+        .slide.visible .stagger-list li:nth-child(2) { transition-delay: 0.17s; }
+        .slide.visible .stagger-list li:nth-child(3) { transition-delay: 0.24s; }
+        .slide.visible .stagger-list li:nth-child(4) { transition-delay: 0.31s; }
+        .slide.visible .stagger-list li:nth-child(5) { transition-delay: 0.38s; }
+        .slide.visible .stagger-list li:nth-child(6) { transition-delay: 0.45s; }
+
+        .card, .mode-card, .strategy-card {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+        }
+        .slide.visible .card:nth-child(1),
+        .slide.visible .mode-card:nth-child(1),
+        .slide.visible .strategy-card:nth-child(1) { transition-delay: 0.1s; }
+        .slide.visible .card:nth-child(2),
+        .slide.visible .mode-card:nth-child(2),
+        .slide.visible .strategy-card:nth-child(2) { transition-delay: 0.2s; }
+        .slide.visible .card:nth-child(3),
+        .slide.visible .mode-card:nth-child(3),
+        .slide.visible .strategy-card:nth-child(3) { transition-delay: 0.3s; }
+        .slide.visible .card:nth-child(4),
+        .slide.visible .strategy-card:nth-child(4) { transition-delay: 0.4s; }
+        .slide.visible .card,
+        .slide.visible .mode-card,
+        .slide.visible .strategy-card { opacity: 1; transform: none; }
+
+        .step {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease);
+        }
+        .slide.visible .step:nth-child(1) { transition-delay: 0.1s; }
+        .slide.visible .step:nth-child(2) { transition-delay: 0.25s; }
+        .slide.visible .step:nth-child(3) { transition-delay: 0.4s; }
+        .slide.visible .step:nth-child(4) { transition-delay: 0.55s; }
+        .slide.visible .step { opacity: 1; transform: none; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .nav-dots, .keyboard-hint { display: none; }
+            .slide { padding-right: var(--slide-padding); }
+            .card-grid, .strategy-grid { grid-template-columns: 1fr; }
+            .card-row, .mode-grid { grid-template-columns: 1fr; }
+            .plan-grid { grid-template-columns: 1fr; }
+            h1 { font-size: clamp(3rem, 14vw, 5rem); }
+            .dramatic { font-size: clamp(3.5rem, 16vw, 6rem); }
+            .step { gap: 1rem; }
+            .step-number { width: 40px; font-size: 2.5rem; }
+            .geo-square, .geo-line, .geo-outline { display: none; }
+            .shortcut-grid { grid-template-columns: 140px 1fr; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-left, .reveal-scale,
+            .card, .mode-card, .strategy-card, .step,
+            .stagger-list li {
+                transition: opacity 0.2s ease !important;
+                transform: none !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar" id="progressBar"></div>
+    <nav class="nav-dots" id="navDots" aria-label="Навигация по слайдам"></nav>
+    <div class="keyboard-hint" id="keyboardHint">Стрелки / пробел для навигации</div>
+
+    <!-- =======================================
+         SLIDE 1 — TITLE
+         ======================================= -->
+    <section class="slide" data-slide="1">
+        <div class="geo-square" style="width:120px;height:120px;bottom:10%;right:15%;opacity:0.15;"></div>
+        <div class="geo-line" style="width:200px;height:3px;top:20%;right:8%;"></div>
+        <h1 class="reveal">Занятие 2</h1>
+        <p class="subtitle reveal">Оживляем прототип в Cursor</p>
+        <p class="meta reveal">Константин Чуйков &middot; 25 марта 2026</p>
+    </section>
+
+    <!-- =======================================
+         SLIDE 2 — ПЛАН ОБУЧЕНИЯ (recap)
+         ======================================= -->
+    <section class="slide" data-slide="2">
+        <span class="slide-number reveal">02</span>
+        <h2 class="reveal">План обучения</h2>
+        <div class="plan-grid reveal">
+            <div class="plan-col">
+                <h3>Занятие 1 <span class="plan-hours">1 час ✓</span></h3>
+                <h4>Создаём прототип</h4>
+                <ul>
+                    <li>Введение в вайбкодинг</li>
+                    <li>Карта инструментов</li>
+                    <li>Прототип в Харви</li>
+                    <li>Запустили локально</li>
+                </ul>
+            </div>
+            <div class="plan-col plan-col-active">
+                <h3>Занятие 2 <span class="plan-hours">2 часа ←</span></h3>
+                <h4>Оживляем прототип</h4>
+                <ul>
+                    <li>Dify — AI-воркфлоу</li>
+                    <li>Cursor — IDE для вайб-кодинга</li>
+                    <li>Бэкенд + фронтенд</li>
+                    <li>MCP, правила, контекст</li>
+                    <li>Работа с ошибками агентов</li>
+                </ul>
+                <div class="plan-hw">
+                    <strong>ДЗ:</strong> Развернуть прототип и доработать
+                </div>
+            </div>
+            <div class="plan-col">
+                <h3>Занятие 3 <span class="plan-hours">1 час</span></h3>
+                <h4>Продвинутый вайбкодинг</h4>
+                <ul>
+                    <li>Spec-Driven Development</li>
+                    <li>Свой MCP-сервер</li>
+                    <li>Feedback loop</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 3 — RECAP: ГДЕ МЫ ОСТАНОВИЛИСЬ
+         ======================================= -->
+    <section class="slide" data-slide="3">
+        <span class="slide-number reveal">03</span>
+        <h2 class="reveal">Где мы остановились</h2>
+        <div class="steps">
+            <div class="step">
+                <span class="step-number">✓</span>
+                <div>
+                    <span class="step-text">Прототип в браузерном агенте</span>
+                    <p class="step-desc">Кликабельный, но ничего не работает</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-number">✓</span>
+                <div>
+                    <span class="step-text">Скачали код и запустили локально</span>
+                    <p class="step-desc">npm install → npm run dev</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-number" style="color: var(--accent);">→</span>
+                <div>
+                    <span class="step-text">Оживляем!</span>
+                    <p class="step-desc">Подключаем AI-бэкенд, базу данных, реальную логику</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 4 — ПЛАН НА СЕГОДНЯ
+         ======================================= -->
+    <section class="slide" data-slide="4">
+        <span class="slide-number reveal">04</span>
+        <h2 class="reveal">План на сегодня</h2>
+        <div class="flow-diagram reveal">
+            <div class="flow-node">Файл</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node highlighted">Dify</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node">Тест-кейсы</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node highlighted">API</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node">БД</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node highlighted">UI</div>
+        </div>
+        <ul class="content-list stagger-list" style="margin-top: 2rem;">
+            <li>Dify — создаём AI-воркфлоу для генерации тест-кейсов</li>
+            <li>Cursor — оживляем бэкенд (API + база данных)</li>
+            <li>Cursor — подключаем фронтенд к реальным данным</li>
+            <li>Настройки, MCP, правила, контекст</li>
+            <li>Стратегии работы с ошибками агентов</li>
+        </ul>
+    </section>
+
+    <!-- =======================================
+         SLIDE 5 — DIFY: ЧТО ЭТО
+         ======================================= -->
+    <section class="slide" data-slide="5">
+        <span class="slide-number reveal">05</span>
+        <h2 class="reveal">Dify</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Визуальный конструктор AI-воркфлоу</p>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Зачем?</h3>
+                <p>Сложные AI-пайплайны без кода: парсинг документов, генерация, классификация. Визуальный drag-and-drop билдер.</p>
+            </div>
+            <div class="card">
+                <h3>API из коробки</h3>
+                <p>Каждый воркфлоу получает REST API. Вызываем из своего приложения одним HTTP-запросом.</p>
+            </div>
+            <div class="card">
+                <h3>Наш кейс</h3>
+                <p>Загружаем спецификацию → парсим текст → LLM генерирует тест-кейсы → возвращаем JSON.</p>
+            </div>
+            <div class="card">
+                <h3>Альтернативы</h3>
+                <p>n8n, Make, Langflow. Dify — опенсорс, self-hosted, заточен на LLM-пайплайны.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 5a — DIFY: НАШ ВОРКФЛОУ
+         ======================================= -->
+    <section class="slide" data-slide="5a">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal">Наш воркфлоу в Dify</h2>
+        <div class="flow-diagram reveal" style="margin-bottom: 2rem;">
+            <div class="flow-node">Start</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node">Doc Extractor</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node highlighted">LLM</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node">End</div>
+        </div>
+        <div class="code-block reveal">
+            <span class="comment">// Вызов Dify API из нашего приложения</span><br>
+            <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="func">fetch</span>(<span class="string">'https://api.dify.ai/v1/workflows/run'</span>, {<br>
+            &nbsp;&nbsp;method: <span class="string">'POST'</span>,<br>
+            &nbsp;&nbsp;headers: {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Authorization'</span>: <span class="string">'Bearer app-...'</span>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Content-Type'</span>: <span class="string">'application/json'</span><br>
+            &nbsp;&nbsp;},<br>
+            &nbsp;&nbsp;body: <span class="func">JSON.stringify</span>({<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;inputs: {},<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;response_mode: <span class="string">'blocking'</span>,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;user: <span class="string">'demo-user'</span><br>
+            &nbsp;&nbsp;})<br>
+            });
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 6 — LIVE DEMO: DIFY
+         ======================================= -->
+    <section class="slide center-slide" data-slide="6">
+        <div class="geo-square" style="width:200px;height:200px;bottom:5%;left:5%;opacity:0.08;"></div>
+        <div class="geo-line" style="width:3px;height:200px;top:10%;right:10%;"></div>
+        <span class="slide-number reveal">06</span>
+        <p class="subtitle reveal" style="margin-bottom: 0.5rem;">Live Demo</p>
+        <div class="dramatic reveal">Dify</div>
+        <p class="subtitle reveal" style="margin-top: 1rem;">Создаём воркфлоу и тестируем API</p>
+    </section>
+
+    <!-- =======================================
+         SLIDE 7 — CURSOR: ЗНАКОМСТВО
+         ======================================= -->
+    <section class="slide" data-slide="7">
+        <span class="slide-number reveal">07</span>
+        <h2 class="reveal">Cursor</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">IDE, созданная для вайб-кодинга</p>
+        <ul class="content-list stagger-list">
+            <li>Форк VS Code — все расширения и настройки работают</li>
+            <li>AI встроен в каждый элемент: чат, автокомплит, рефакторинг</li>
+            <li>Поддержка лучших моделей: Claude, GPT-4o, Gemini</li>
+            <li>Agent Mode — AI сам читает файлы, пишет код, запускает команды</li>
+            <li>Pro: $20/мес, Business: $40/мес, есть бесплатный тариф</li>
+        </ul>
+    </section>
+
+    <!-- =======================================
+         SLIDE 8 — РЕЖИМЫ CURSOR
+         ======================================= -->
+    <section class="slide" data-slide="8">
+        <span class="slide-number reveal">08</span>
+        <h2 class="reveal">Режимы работы</h2>
+        <div class="mode-grid">
+            <div class="mode-card">
+                <span class="mode-emoji">💬</span>
+                <h3>Ask</h3>
+                <p>Вопрос-ответ. Объяснить код, найти баг, предложить архитектуру. Не меняет файлы.</p>
+            </div>
+            <div class="mode-card active-mode">
+                <span class="mode-emoji">🤖</span>
+                <h3>Agent</h3>
+                <p>Автономный агент. Сам читает файлы, пишет код, запускает команды в терминале. Основной режим для вайб-кодинга.</p>
+            </div>
+            <div class="mode-card">
+                <span class="mode-emoji">✏️</span>
+                <h3>Edit</h3>
+                <p>Точечное редактирование. Выделяешь код → описываешь изменение. Быстро и экономно по токенам.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 9 — ГОРЯЧИЕ КЛАВИШИ
+         ======================================= -->
+    <section class="slide" data-slide="9">
+        <span class="slide-number reveal">09</span>
+        <h2 class="reveal">Горячие клавиши</h2>
+        <div class="shortcut-grid reveal">
+            <div class="shortcut-key">⌘ L</div>
+            <div class="shortcut-desc">Открыть AI-чат (Chat Panel)</div>
+            <div class="shortcut-key">⌘ I</div>
+            <div class="shortcut-desc">Composer — создать новый запрос к агенту</div>
+            <div class="shortcut-key">⌘ K</div>
+            <div class="shortcut-desc">Inline Edit — точечное редактирование выделенного кода</div>
+            <div class="shortcut-key">Tab</div>
+            <div class="shortcut-desc">Принять предложение автокомплита</div>
+            <div class="shortcut-key">⌘ Shift P</div>
+            <div class="shortcut-desc">Палитра команд (все возможности Cursor)</div>
+            <div class="shortcut-key">@ + имя</div>
+            <div class="shortcut-desc">Подключить контекст: файлы, папки, docs, web, codebase</div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 10 — LIVE DEMO: БЭКЕНД
+         ======================================= -->
+    <section class="slide center-slide" data-slide="10">
+        <div class="geo-square" style="width:150px;height:150px;top:8%;right:12%;opacity:0.1;"></div>
+        <span class="slide-number reveal">10</span>
+        <p class="subtitle reveal" style="margin-bottom: 0.5rem;">Live Demo</p>
+        <div class="dramatic reveal" style="font-size: clamp(3rem, 10vw, 9rem);">Бэкенд</div>
+        <p class="subtitle reveal" style="margin-top: 1rem;">API + база данных + интеграция с Dify</p>
+    </section>
+
+    <!-- =======================================
+         SLIDE 11 — LIVE DEMO: ФРОНТЕНД
+         ======================================= -->
+    <section class="slide center-slide" data-slide="11">
+        <div class="geo-line" style="width:250px;height:3px;bottom:15%;left:5%;"></div>
+        <span class="slide-number reveal">11</span>
+        <p class="subtitle reveal" style="margin-bottom: 0.5rem;">Live Demo</p>
+        <div class="dramatic reveal" style="font-size: clamp(3rem, 10vw, 9rem);">Фронт</div>
+        <p class="subtitle reveal" style="margin-top: 1rem;">Подключаем UI к реальным данным</p>
+    </section>
+
+    <!-- =======================================
+         SLIDE 11a — ПЕРЕРЫВ
+         ======================================= -->
+    <section class="slide slide-phrase" data-slide="11a">
+        <h2 class="phrase-text reveal">Перерыв<br>5 минут</h2>
+    </section>
+
+    <!-- =======================================
+         SLIDE 12 — КОНТЕКСТ В CURSOR
+         ======================================= -->
+    <section class="slide" data-slide="12">
+        <span class="slide-number reveal">12</span>
+        <h2 class="reveal">Контекст — главное оружие</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">AI хорош настолько, насколько хорош контекст, который вы ему даёте</p>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>@Files / @Folders</h3>
+                <p>Подключайте конкретные файлы и папки к запросу. AI видит их содержимое и учитывает при генерации.</p>
+            </div>
+            <div class="card">
+                <h3>@Codebase</h3>
+                <p>Поиск по всему проекту. AI найдёт релевантные файлы сам. Полезно для: «найди где используется X».</p>
+            </div>
+            <div class="card">
+                <h3>@Docs</h3>
+                <p>Подключите документацию библиотек. AI будет писать код по актуальной документации, а не по устаревшим знаниям.</p>
+            </div>
+            <div class="card">
+                <h3>@Web</h3>
+                <p>Поиск в интернете прямо из чата. Свежие решения, обновления библиотек, Stack Overflow.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 13 — RULES
+         ======================================= -->
+    <section class="slide" data-slide="13">
+        <span class="slide-number reveal">13</span>
+        <h2 class="reveal">.cursor/rules</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Правила для AI, которые работают на весь проект</p>
+        <div class="code-block reveal">
+            <span class="comment"># .cursor/rules/backend.mdc</span><br><br>
+            <span class="keyword">description:</span> <span class="string">Правила для backend-разработки</span><br>
+            <span class="keyword">globs:</span> <span class="string">src/api/**, src/db/**</span><br><br>
+            <span class="comment">## Стек</span><br>
+            - Используй TypeScript строго<br>
+            - База данных: PostgreSQL через Drizzle ORM<br>
+            - API: Next.js App Router (Route Handlers)<br><br>
+            <span class="comment">## Стиль</span><br>
+            - Обработка ошибок через try/catch с типизацией<br>
+            - Валидация входных данных через Zod<br>
+            - Никаких any — только явные типы
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 14 — MCP
+         ======================================= -->
+    <section class="slide" data-slide="14">
+        <span class="slide-number reveal">14</span>
+        <h2 class="reveal">MCP</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Model Context Protocol — расширения для AI-агента</p>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Что это?</h3>
+                <p>Стандартный протокол, который даёт AI-агенту доступ к внешним инструментам: базы данных, API, файловые системы, браузер.</p>
+            </div>
+            <div class="card">
+                <h3>Как подключить</h3>
+                <p>.cursor/mcp.json — один JSON-файл. Cursor автоматически подхватит все описанные серверы и покажет доступные инструменты.</p>
+            </div>
+            <div class="card">
+                <h3>Полезные MCP</h3>
+                <ul>
+                    <li>🗄 PostgreSQL — агент пишет и проверяет запросы</li>
+                    <li>🌐 Browser — агент видит UI приложения</li>
+                    <li>📋 Figma — агент читает макеты</li>
+                    <li>📁 Filesystem — расширенная работа с файлами</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Результат</h3>
+                <p>Агент не просто пишет код — он проверяет результат. Написал SQL → выполнил → увидел ошибку → исправил. Полный цикл.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 15 — ЭКОНОМИЯ ТОКЕНОВ
+         ======================================= -->
+    <section class="slide" data-slide="15">
+        <span class="slide-number reveal">15</span>
+        <h2 class="reveal">Экономия токенов</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Как не сжечь бюджет за день</p>
+        <ul class="content-list stagger-list">
+            <li><strong>Edit mode</strong> для мелких правок — дешевле агента в 5-10 раз</li>
+            <li><strong>Конкретный контекст</strong> — @file лучше @codebase (меньше токенов, точнее результат)</li>
+            <li><strong>Декомпозиция</strong> — маленькие задачи = маленький контекст = дешевле</li>
+            <li><strong>Новый чат</strong> — длинная история съедает токены. Закончил задачу → новый чат</li>
+            <li><strong>Модели для разных задач</strong> — Claude для архитектуры, быстрые модели для рутины</li>
+            <li><strong>Rules</strong> — не повторяйте одно и то же в каждом промпте</li>
+        </ul>
+    </section>
+
+    <!-- =======================================
+         SLIDE 16 — СТРАТЕГИИ РАБОТЫ С ОШИБКАМИ
+         ======================================= -->
+    <section class="slide" data-slide="16">
+        <span class="slide-number reveal">16</span>
+        <h2 class="reveal">Когда агент ломает</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Стратегии выхода из тупика</p>
+        <div class="strategy-grid">
+            <div class="strategy-card">
+                <span class="strategy-icon">🔄</span>
+                <h3>Зацикливание</h3>
+                <p>Агент исправляет ошибку и создаёт новую. Решение: остановить, описать проблему заново, дать контекст ошибки явно.</p>
+            </div>
+            <div class="strategy-card">
+                <span class="strategy-icon">⏪</span>
+                <h3>Checkpoint / Restore</h3>
+                <p>Cursor сохраняет состояние после каждого шага. Откатитесь к рабочему состоянию и попробуйте другой подход.</p>
+            </div>
+            <div class="strategy-card">
+                <span class="strategy-icon">🧹</span>
+                <h3>Чистый контекст</h3>
+                <p>Если чат слишком длинный — начните новый. Скопируйте только суть проблемы. Свежий взгляд = свежий результат.</p>
+            </div>
+            <div class="strategy-card">
+                <span class="strategy-icon">🧠</span>
+                <h3>Человек в цепи</h3>
+                <p>Не давайте агенту бесконтрольно менять код. Ревью каждого diff, approve по частям. Вы — архитектор, AI — исполнитель.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 17 — BEST PRACTICES
+         ======================================= -->
+    <section class="slide" data-slide="17">
+        <span class="slide-number reveal">17</span>
+        <h2 class="reveal">Best Practices</h2>
+        <ul class="content-list stagger-list">
+            <li><strong>Промпт = ТЗ.</strong> Чем чётче описали задачу — тем лучше результат</li>
+            <li><strong>Итеративно.</strong> Не пытайтесь сделать всё за один промпт. Маленькие шаги</li>
+            <li><strong>Git.</strong> Коммитьте перед каждым крупным запросом к агенту</li>
+            <li><strong>Ревью.</strong> Всегда читайте diff. AI генерирует уязвимости и ненужный код</li>
+            <li><strong>Не доверяйте слепо.</strong> AI уверенно врёт. Проверяйте библиотеки, API-эндпоинты</li>
+        </ul>
+    </section>
+
+    <!-- =======================================
+         SLIDE 18 — ЧТО ДАЛЬШЕ
+         ======================================= -->
+    <section class="slide" data-slide="18">
+        <span class="slide-number reveal">18</span>
+        <h2 class="reveal">Домашнее задание</h2>
+        <div class="steps">
+            <div class="step">
+                <span class="step-number">01</span>
+                <div>
+                    <span class="step-text">Развернуть прототип в Cursor</span>
+                    <p class="step-desc">Склонировать репо, установить зависимости, запустить локально</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-number">02</span>
+                <div>
+                    <span class="step-text">Оживить свой прототип</span>
+                    <p class="step-desc">Подключить реальные данные, API, бэкенд</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-number">03</span>
+                <div>
+                    <span class="step-text">Настроить .cursor/rules</span>
+                    <p class="step-desc">Добавить правила под свой проект и стек</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 19 — ЗАНЯТИЕ 3 PREVIEW
+         ======================================= -->
+    <section class="slide" data-slide="19">
+        <span class="slide-number reveal">19</span>
+        <h2 class="reveal">На занятии 3</h2>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Spec-Driven Development</h3>
+                <p>Приложения через спецификации. Сначала описываем — потом генерируем. Масштабируемый подход.</p>
+            </div>
+            <div class="card">
+                <h3>Свой MCP-сервер</h3>
+                <p>Создаём собственные инструменты для AI-агента. Подключаем внутренние API компании.</p>
+            </div>
+            <div class="card">
+                <h3>Feedback Loop</h3>
+                <p>AI Code Review, статический анализ, автотесты. Агент пишет код → проверяет себя → исправляет.</p>
+            </div>
+            <div class="card">
+                <h3>Голосовой ввод</h3>
+                <p>Вайб-кодинг голосом. Диктуешь задачу — получаешь код. Hands-free разработка.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 20 — ВОПРОСЫ
+         ======================================= -->
+    <section class="slide" data-slide="20">
+        <div class="geo-square" style="width:100px;height:100px;top:10%;right:15%;opacity:0.1;"></div>
+        <span class="slide-number reveal">20</span>
+        <h2 class="reveal">Итоги</h2>
+        <ul class="content-list stagger-list">
+            <li>Прототип ожил — от имитации к рабочему приложению</li>
+            <li>Cursor — ваш главный инструмент вайб-кодинга</li>
+            <li>Контекст, правила, MCP — три кита эффективности</li>
+            <li>Telegram &laquo;Вайб-кодинг по Чуйкову&raquo;</li>
+        </ul>
+        <div class="big-text reveal">Вопросы?</div>
+    </section>
+
+    <!-- =======================================
+         JAVASCRIPT — PRESENTATION CONTROLLER
+         ======================================= -->
+    <script>
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.totalSlides = this.slides.length;
+                this.currentSlide = 0;
+                this.progressBar = document.getElementById('progressBar');
+                this.navDotsContainer = document.getElementById('navDots');
+                this.keyboardHint = document.getElementById('keyboardHint');
+                this.buildNavDots();
+                this.setupIntersectionObserver();
+                this.setupKeyboard();
+                this.setupTouch();
+                this.setupWheel();
+                this.hideHintAfterFirstNav();
+            }
+            buildNavDots() {
+                this.slides.forEach((_, i) => {
+                    const dot = document.createElement('button');
+                    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', `Слайд ${i + 1}`);
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.navDotsContainer.appendChild(dot);
+                });
+                this.navDots = this.navDotsContainer.querySelectorAll('.nav-dot');
+            }
+            setupIntersectionObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            const index = Array.from(this.slides).indexOf(entry.target);
+                            this.currentSlide = index;
+                            this.updateProgress();
+                            this.updateDots();
+                        }
+                    });
+                }, { threshold: 0.4 });
+                this.slides.forEach(slide => observer.observe(slide));
+            }
+            updateProgress() {
+                const progress = ((this.currentSlide + 1) / this.totalSlides) * 100;
+                this.progressBar.style.width = progress + '%';
+            }
+            updateDots() {
+                this.navDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === this.currentSlide);
+                });
+            }
+            goToSlide(index) {
+                if (index < 0 || index >= this.totalSlides) return;
+                this.slides[index].scrollIntoView({ behavior: 'smooth' });
+            }
+            setupKeyboard() {
+                document.addEventListener('keydown', (e) => {
+                    switch (e.key) {
+                        case 'ArrowDown': case 'ArrowRight': case ' ':
+                            e.preventDefault(); this.goToSlide(this.currentSlide + 1); break;
+                        case 'ArrowUp': case 'ArrowLeft':
+                            e.preventDefault(); this.goToSlide(this.currentSlide - 1); break;
+                        case 'Home': e.preventDefault(); this.goToSlide(0); break;
+                        case 'End': e.preventDefault(); this.goToSlide(this.totalSlides - 1); break;
+                    }
+                });
+            }
+            setupTouch() {
+                let startY = 0, startX = 0;
+                document.addEventListener('touchstart', (e) => {
+                    startY = e.touches[0].clientY;
+                    startX = e.touches[0].clientX;
+                }, { passive: true });
+                document.addEventListener('touchend', (e) => {
+                    const deltaY = startY - e.changedTouches[0].clientY;
+                    const deltaX = startX - e.changedTouches[0].clientX;
+                    if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 50) {
+                        this.goToSlide(deltaY > 0 ? this.currentSlide + 1 : this.currentSlide - 1);
+                    }
+                }, { passive: true });
+            }
+            setupWheel() {
+                let lastWheel = 0;
+                document.addEventListener('wheel', (e) => {
+                    const now = Date.now();
+                    if (now - lastWheel < 800) return;
+                    lastWheel = now;
+                    if (e.deltaY > 20) this.goToSlide(this.currentSlide + 1);
+                    else if (e.deltaY < -20) this.goToSlide(this.currentSlide - 1);
+                }, { passive: true });
+            }
+            hideHintAfterFirstNav() {
+                const hideOnce = () => {
+                    this.keyboardHint.classList.add('hidden');
+                    document.removeEventListener('keydown', hideOnce);
+                    document.removeEventListener('touchstart', hideOnce);
+                    document.removeEventListener('wheel', hideOnce);
+                };
+                document.addEventListener('keydown', hideOnce);
+                document.addEventListener('touchstart', hideOnce);
+                document.addEventListener('wheel', hideOnce);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => { new SlidePresentation(); });
+    </script>
+</body>
+</html>
