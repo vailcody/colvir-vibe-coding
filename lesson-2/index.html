@@ -1130,38 +1130,9 @@
         <img src="img/context-arena.jpg" alt="OpenAI MRCR: Context Arena benchmark" class="reveal" style="width: 100%; max-width: 1100px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
     </section>
 
-    <!-- =======================================
-         SLIDE 14c — HOOKS
-         ======================================= -->
-    <section class="slide" data-slide="14c">
-        <span class="slide-number reveal">20</span>
-        <h2 class="reveal">Hooks</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1rem;">Автоматические скрипты на события агента</p>
-        <div class="card-grid">
-            <div class="card highlighted">
-                <h3>Что это</h3>
-                <p>Скрипты в <code>.cursor/hooks.json</code>, которые запускаются на события: после правки файла, перед командой, в начале сессии.</p>
-            </div>
-            <div class="card">
-                <h3>Ключевые события</h3>
-                <p><strong>sessionStart</strong> — начало сессии. <strong>afterFileEdit</strong> — после правки файла. <strong>beforeShellExecution</strong> — перед командой. <strong>stop</strong> — завершение.</p>
-            </div>
-            <div class="card">
-                <h3>Пример: автокоммит</h3>
-                <p>sessionStart → <code>git add -A && git commit</code>. Каждый новый чат начинается с чистого checkpoint. Всегда можно откатиться.</p>
-            </div>
-            <div class="card">
-                <h3>Пример: автолинт</h3>
-                <p>afterFileEdit → <code>pnpm lint</code>. Агент видит ошибки линтера и сам исправляет. Код всегда компилируется.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- =======================================
-         SLIDE 8c — РЕЖИМЫ AGENT + DEBUG
          ======================================= -->
     <section class="slide" data-slide="8c">
-        <span class="slide-number reveal">21</span>
+        <span class="slide-number reveal">20</span>
         <h2 class="reveal">Режимы: Agent &amp; Debug</h2>
         <div class="card-grid">
             <div class="card highlighted">
@@ -1180,7 +1151,7 @@
          SLIDE 14 — MCP
          ======================================= -->
     <section class="slide" data-slide="14">
-        <span class="slide-number reveal">22</span>
+        <span class="slide-number reveal">21</span>
         <h2 class="reveal">MCP</h2>
         <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Model Context Protocol — расширения для AI-агента</p>
         <div class="card-grid">
@@ -1212,7 +1183,7 @@
          SLIDE 14a — SKILLS
          ======================================= -->
     <section class="slide" data-slide="14a">
-        <span class="slide-number reveal">23</span>
+        <span class="slide-number reveal">22</span>
         <h2 class="reveal">Skills</h2>
         <p class="subtitle reveal" style="margin-bottom: 1rem;">Переиспользуемые процедуры для агента</p>
         <div class="card-grid">
@@ -1239,7 +1210,7 @@
          SLIDE 14b — СУБАГЕНТЫ
          ======================================= -->
     <section class="slide" data-slide="14b">
-        <span class="slide-number reveal">24</span>
+        <span class="slide-number reveal">23</span>
         <h2 class="reveal">Субагенты</h2>
         <p class="subtitle reveal" style="margin-bottom: 1rem;">Параллельные агенты со своим контекстом</p>
         <div class="card-grid">
@@ -1262,6 +1233,35 @@
         </div>
         <p class="subtitle reveal" style="margin-top: 1rem;">Создание: <code>/create-subagent</code> прямо в чате Cursor</p>
     </section>
+    <!-- =======================================
+         SLIDE 14c — HOOKS
+         ======================================= -->
+    <section class="slide" data-slide="14c">
+        <span class="slide-number reveal">24</span>
+        <h2 class="reveal">Hooks</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Автоматические скрипты на события агента</p>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Что это</h3>
+                <p>Скрипты в <code>.cursor/hooks.json</code>, которые запускаются на события: после правки файла, перед командой, в начале сессии.</p>
+            </div>
+            <div class="card">
+                <h3>Ключевые события</h3>
+                <p><strong>sessionStart</strong> — начало сессии. <strong>afterFileEdit</strong> — после правки файла. <strong>beforeShellExecution</strong> — перед командой. <strong>stop</strong> — завершение.</p>
+            </div>
+            <div class="card">
+                <h3>Пример: автокоммит</h3>
+                <p>sessionStart → <code>git add -A && git commit</code>. Каждый новый чат начинается с чистого checkpoint. Всегда можно откатиться.</p>
+            </div>
+            <div class="card">
+                <h3>Пример: автолинт</h3>
+                <p>afterFileEdit → <code>pnpm lint</code>. Агент видит ошибки линтера и сам исправляет. Код всегда компилируется.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 8c — РЕЖИМЫ AGENT + DEBUG
 
          ======================================= -->
     <section class="slide" data-slide="15">
