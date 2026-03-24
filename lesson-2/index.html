@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вайб-кодинг — Занятие 2: Оживляем прототип в Cursor</title>
+    <title>Вайб-кодинг — Занятие 2: Оживляем прототип</title>
 
     <!-- Google Fonts: Archivo (display) + Nunito (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -650,6 +650,30 @@
             }
             html { scroll-behavior: auto; }
         }
+        /* === SETTINGS SLIDES === */
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        .settings-img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .settings-notes {
+            list-style: none;
+            padding: 0;
+        }
+        .settings-notes li {
+            font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+            line-height: 1.5;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--grid);
+        }
+        .settings-notes li:last-child { border-bottom: none; }
+        .settings-notes strong { color: var(--accent); }
     </style>
 </head>
 <body>
@@ -664,8 +688,8 @@
     <section class="slide" data-slide="1">
         <div class="geo-square" style="width:120px;height:120px;bottom:10%;right:15%;opacity:0.15;"></div>
         <div class="geo-line" style="width:200px;height:3px;top:20%;right:8%;"></div>
-        <h1 class="reveal">Вайб-кодинг</h1>
-        <p class="subtitle reveal">Занятие 2 &mdash; Оживляем прототип в Cursor</p>
+        <h1 class="reveal">Занятие 2</h1>
+        <p class="subtitle reveal">Оживляем прототип в Cursor</p>
         <p class="meta reveal">Константин Чуйков &middot; 24 марта 2026</p>
     </section>
 
@@ -691,13 +715,14 @@
                 <h4>Оживляем прототип</h4>
                 <ul>
                     <li>Dify — AI-воркфлоу</li>
-                    <li>Cursor — IDE для вайб-кодинга</li>
-                    <li>Бэкенд + фронтенд</li>
-                    <li>MCP, правила, контекст</li>
-                    <li>Работа с ошибками агентов</li>
+                    <li>Cursor — режимы, контекст</li>
+                    <li>Rules, Skills, Hooks</li>
+                    <li>Субагенты, MCP</li>
+                    <li>Бэкенд + фронтенд (демо)</li>
+                    <li>Экономия токенов</li>
                 </ul>
                 <div class="plan-hw">
-                    <strong>ДЗ:</strong> Развернуть прототип и доработать
+                    <strong>ДЗ:</strong> Настроить проект и оживить прототип
                 </div>
             </div>
             <div class="plan-col">
@@ -772,28 +797,30 @@
     </section>
 
     <!-- =======================================
-         SLIDE 5 — DIFY: РОЛЬ В НАШЕМ ПРОЕКТЕ
+         SLIDE 5 — DIFY: ЧТО ЭТО
          ======================================= -->
     <section class="slide" data-slide="5">
         <span class="slide-number reveal">05</span>
-        <h2 class="reveal">Роль Dify в проекте</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">AI-бэкенд, который делает всю тяжёлую работу</p>
-        <div class="flow-diagram reveal" style="margin-bottom: 2rem;">
-            <div class="flow-node">📄 Файл</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-node">Doc Extractor</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-node highlighted">LLM</div>
-            <span class="flow-arrow">→</span>
-            <div class="flow-node">JSON</div>
+        <h2 class="reveal">Dify</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Визуальный конструктор AI-воркфлоу</p>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Зачем?</h3>
+                <p>Сложные AI-пайплайны без кода: парсинг документов, генерация, классификация. Визуальный drag-and-drop билдер.</p>
+            </div>
+            <div class="card">
+                <h3>API из коробки</h3>
+                <p>Каждый воркфлоу получает REST API. Вызываем из своего приложения одним HTTP-запросом.</p>
+            </div>
+            <div class="card">
+                <h3>Наш кейс</h3>
+                <p>Загружаем спецификацию → парсим текст → LLM генерирует тест-кейсы → возвращаем JSON.</p>
+            </div>
+            <div class="card">
+                <h3>Альтернативы</h3>
+                <p>n8n, Make, Langflow. Dify — опенсорс, self-hosted, заточен на LLM-пайплайны.</p>
+            </div>
         </div>
-        <ul class="content-list stagger-list">
-            <li><strong>Получает файл</strong> — спецификацию требований к продукту</li>
-            <li><strong>Парсит документ</strong> — извлекает текст из PDF, DOCX, TXT</li>
-            <li><strong>Отправляет в LLM</strong> — модель генерирует тест-кейсы по требованиям</li>
-            <li><strong>Возвращает структурированный JSON</strong> — готовые данные для нашего приложения</li>
-            <li><strong>Вызываем по API</strong> — одним HTTP-запросом из нашего бэкенда, получаем ответ и сохраняем в базу</li>
-        </ul>
     </section>
 
     <!-- =======================================
@@ -841,38 +868,21 @@
     </section>
 
     <!-- =======================================
-         SLIDE 7 — CURSOR: ПОЧЕМУ #1
+         SLIDE 7 — CURSOR: ЗНАКОМСТВО
          ======================================= -->
     <section class="slide" data-slide="7">
         <span class="slide-number reveal">07</span>
-        <h2 class="reveal">Почему Cursor — #1</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Что делает его лидером AI-разработки в 2026</p>
-        <div class="card-grid">
-            <div class="card highlighted">
-                <h3>Семантический индекс</h3>
-                <p>Индексирует весь проект и ищет по смыслу. Копилот видит 3-5 файлов — Cursor видит всё. Ключевое преимущество над расширениями.</p>
-            </div>
-            <div class="card">
-                <h3>Privacy &amp; SOC 2</h3>
-                <p>Код не хранится на серверах. Business-тариф + SOC 2 Type II. Для банковского софта — must have.</p>
-            </div>
-            <div class="card">
-                <h3>Rules, Skills, Hooks</h3>
-                <p>.cursor/rules — стек, стиль, архитектура. SKILL.md — переиспользуемые навыки. Hooks — автоматические действия после генерации кода.</p>
-            </div>
-            <div class="card">
-                <h3>Subagents &amp; Cloud Agents</h3>
-                <p>Параллельные вложенные агенты для больших задач. Cloud agents работают часами автономно, создают ветки, гоняют CI.</p>
-            </div>
-            <div class="card">
-                <h3>Automations (март 2026)</h3>
-                <p>Фоновые агенты на триггерах: Slack, Linear, GitHub, PagerDuty. Ревью безопасности, патчинг зависимостей, мониторинг дрифта — автоматически.</p>
-            </div>
-            <div class="card">
-                <h3>Plugins &amp; Marketplace</h3>
-                <p>30+ интеграций: Figma, Stripe, Datadog, Atlassian, PlanetScale. Плагины — MCP-серверы с контролем доступа. Работает и в JetBrains.</p>
-            </div>
-        </div>
+        <h2 class="reveal">Cursor</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">IDE, созданная для вайб-кодинга</p>
+        <ul class="content-list stagger-list">
+            <li><strong>Форк VS Code</strong> — все расширения и настройки работают</li>
+            <li><strong>Семантический поиск</strong> — индексирует кодобазу, находит по смыслу, а не grep'ом</li>
+            <li><strong>Все модели</strong> — Claude, GPT-4o, Gemini, выбор под задачу</li>
+            <li><strong>Agent Mode</strong> — AI сам читает файлы, пишет код, запускает команды</li>
+            <li><strong>Субагенты</strong> — параллельные агенты со своим контекстом</li>
+            <li><strong>Rules, Skills, Hooks</strong> — настрой поведение AI под проект</li>
+            <li><strong>MCP</strong> — подключай БД, API, браузер напрямую к агенту</li>
+        </ul>
     </section>
 
     <!-- =======================================
@@ -880,30 +890,28 @@
          ======================================= -->
     <section class="slide" data-slide="8">
         <span class="slide-number reveal">08</span>
-        <h2 class="reveal">4 режима чата</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1rem;">+ ⌘K для inline-правок прямо в редакторе</p>
-        <div class="card-grid">
-            <div class="card highlighted">
-                <h3>∞ Agent</h3>
-                <p>Основной режим (⌘I). Автономно читает файлы, пишет код, запускает терминал, итерирует. Пишет → тестирует → видит ошибку → чинит.</p>
+        <h2 class="reveal">Режимы работы</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">4 чат-режима + инлайн-редактор</p>
+        <div class="mode-grid">
+            <div class="mode-card active-mode">
+                <h3>Agent</h3>
+                <p>Автономный. Читает файлы, пишет код, запускает команды. Основной режим.</p>
             </div>
-            <div class="card">
-                <h3>📋 Plan</h3>
-                <p>Декомпозиция фичи. Исследует кодовую базу, генерирует план с Mermaid-диаграммами. Редактируй план до реализации.</p>
+            <div class="mode-card">
+                <h3>Plan</h3>
+                <p>Планирование. Создаёт план задачи, декомпозирует. Ты ревьюишь → «Build Plan».</p>
             </div>
-            <div class="card">
-                <h3>🐛 Debug</h3>
-                <p>Инструментирует логи, анализирует root cause автоматически. Работает со всеми стеками. Когда ошибка непонятная — сюда.</p>
+            <div class="mode-card">
+                <h3>Ask</h3>
+                <p>Вопрос-ответ. Объяснить код, найти баг, предложить архитектуру. Файлы не трогает.</p>
             </div>
-            <div class="card">
-                <h3>💬 Ask</h3>
-                <p>Read-only. Вопросы, объяснения, impact analysis. Всегда начинай с Ask перед сложной задачей — «измерь семь раз».</p>
+            <div class="mode-card">
+                <h3>Debug</h3>
+                <p>Анализ ошибок. Вставляешь ошибку — агент находит root cause и предлагает fix.</p>
             </div>
         </div>
-        <div class="quote reveal" style="margin-top: 1.5rem;">
-            Золотой воркфлоу: Ask → Plan → Agent → Ask (проверка)<br>
-            <span style="font-size: 0.85em; font-weight: 400; color: var(--text-secondary);">⌘K — отдельная inline-правка: выделил код → описал изменение → применил</span>
-        </div>
+        <p class="subtitle reveal" style="margin-top: 1rem;"><strong>⌘K</strong> — инлайн-редактирование: выдели код → опиши правку → мгновенный результат</p>
+        <p class="subtitle reveal" style="margin-top: 0.5rem; color: var(--accent); font-weight: 700;">Золотой workflow: Ask → Plan → Agent → Ask (итерация)</p>
     </section>
 
     <!-- =======================================
@@ -925,6 +933,162 @@
             <div class="shortcut-desc">Палитра команд (все возможности Cursor)</div>
             <div class="shortcut-key">@ + имя</div>
             <div class="shortcut-desc">Подключить контекст: файлы, папки, docs, web, codebase</div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 9a — SETTINGS: GENERAL
+         ======================================= -->
+    <section class="slide" data-slide="9a">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal" style="font-size: clamp(1.8rem, 4vw, 3rem);">Настройки: General</h2>
+        <div class="settings-layout reveal">
+            <img src="img/settings-general.jpg" alt="Cursor Settings General" class="settings-img">
+            <ul class="settings-notes">
+                <li><strong>Privacy / Data Sharing</strong> — «Share Data» означает ваш код может использоваться для обучения. Для корпоративных проектов — выключить!</li>
+                <li><strong>Completion Sound</strong> — звук когда агент закончил. Удобно при фоновой работе</li>
+                <li><strong>System Notifications</strong> — уведомления когда агент завершил или требует внимания</li>
+                <li><strong>Auto-hide editor when empty</strong> — максимизирует чат если нет открытых файлов</li>
+                <li><strong>Import Settings from VS Code</strong> — одна кнопка для миграции всех настроек, расширений и кибиндингов</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 9b — SETTINGS: AGENTS (AUTO-RUN)
+         ======================================= -->
+    <section class="slide" data-slide="9b">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal" style="font-size: clamp(1.8rem, 4vw, 3rem);">Настройки: Agents</h2>
+        <div class="settings-layout reveal">
+            <img src="img/settings-agents-autorun.jpg" alt="Cursor Settings Agents Auto-Run" class="settings-img">
+            <ul class="settings-notes">
+                <li><strong>Auto-Run Mode</strong> — как агент выполняет команды. «Run Everything» = YOLO-режим, агент делает всё без подтверждения. Удобно для демо, опасно для продакшена</li>
+                <li><strong>Browser Protection</strong> — запретить агенту автозапуск браузерных инструментов</li>
+                <li><strong>MCP Tools Protection</strong> — запретить автозапуск MCP-инструментов</li>
+                <li><strong>Auto-Clear Chat</strong> — автоматически новый чат после периода неактивности. Экономит контекст!</li>
+                <li><strong>Queue Messages</strong> — очередь промптов пока агент работает</li>
+                <li><strong>Agent Autocomplete</strong> — подсказки при написании промпта</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 9c — SETTINGS: AGENT REVIEW + CONTEXT
+         ======================================= -->
+    <section class="slide" data-slide="9c">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal" style="font-size: clamp(1.8rem, 4vw, 3rem);">Настройки: Review &amp; Context</h2>
+        <div class="settings-layout reveal">
+            <img src="img/settings-agents-review.jpg" alt="Cursor Settings Agent Review" class="settings-img">
+            <ul class="settings-notes">
+                <li><strong>Agent Review on Commit</strong> — автоматически проверяет код после каждого коммита. Встроенный code review!</li>
+                <li><strong>Include Untracked Files</strong> — включить новые файлы в ревью (ещё не в git)</li>
+                <li><strong>Web Search Tool</strong> — агент может искать в интернете</li>
+                <li><strong>Web Fetch Tool</strong> — агент может загружать контент по URL</li>
+                <li><strong>.cursorignore</strong> — Hierarchical Cursor Ignore: применяется к вложенным папкам</li>
+                <li><strong>Inline Diffs</strong> — показывать изменения прямо в редакторе, а не в отдельной панели</li>
+                <li><strong>Auto Format on Agent Finish</strong> — автоформатирование после завершения агента</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 9d — SETTINGS: TERMINAL + VOICE
+         ======================================= -->
+    <section class="slide" data-slide="9d">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal" style="font-size: clamp(1.8rem, 4vw, 3rem);">Настройки: Terminal &amp; Voice</h2>
+        <div class="settings-layout reveal">
+            <img src="img/settings-agents-terminal.jpg" alt="Cursor Settings Terminal" class="settings-img">
+            <ul class="settings-notes">
+                <li><strong>Toolbar on Selection</strong> — кнопки «Add to Chat» и «Quick Edit» при выделении кода</li>
+                <li><strong>Themed Diff Backgrounds</strong> — цветные фоны для инлайн-диффов</li>
+                <li><strong>Terminal Hint</strong> — подсказка ⌘K в терминале</li>
+                <li><strong>Preview Box for Terminal ⌘K</strong> — превью вместо прямой вставки в shell</li>
+                <li><strong>Collapse Auto-Run Commands</strong> — сворачивать вывод авто-команд по умолчанию</li>
+                <li><strong>Voice Mode: Submit Keywords</strong> — кастомные слова для отправки голосового промпта. Вайб-кодинг голосом!</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 9e — SETTINGS: RULES, SKILLS, SUBAGENTS
+         ======================================= -->
+    <section class="slide" data-slide="9e">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal" style="font-size: clamp(1.8rem, 4vw, 3rem);">Настройки: Rules, Skills, Subagents</h2>
+        <div class="settings-layout reveal">
+            <img src="img/settings-rules-skills.jpg" alt="Cursor Settings Rules Skills Subagents" class="settings-img">
+            <ul class="settings-notes">
+                <li><strong>Rules</strong> — все правила проекта. Видно текст каждого rule. Кнопка «+ New» для создания</li>
+                <li><strong>AGENTS</strong> — AGENTS.md файл как альтернатива .cursor/rules</li>
+                <li><strong>Skills</strong> — «Agent Decides» — агент сам решает когда применить. Видны description'ы. Здесь наши unit-tests и dify-workflow-api</li>
+                <li><strong>Subagents</strong> — кастомные субагенты. Наш security-auditor виден здесь</li>
+                <li><strong>Commands</strong> — переиспользуемые команды через / в чате</li>
+                <li><strong>Include third-party Plugins</strong> — автоимпорт конфигов из других инструментов (Claude, Codex)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 9f — SETTINGS: TOOLS & MCP
+         ======================================= -->
+    <section class="slide" data-slide="9f">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal" style="font-size: clamp(1.8rem, 4vw, 3rem);">Настройки: Tools &amp; MCP</h2>
+        <div class="settings-layout reveal">
+            <img src="img/settings-tools-mcp.jpg" alt="Cursor Settings Tools MCP" class="settings-img">
+            <ul class="settings-notes">
+                <li><strong>Browser Automation</strong> — подключение к Browser Tab. Агент делает скриншоты и тестирует UI</li>
+                <li><strong>Show Localhost Links</strong> — автооткрытие localhost ссылок в браузерной вкладке Cursor</li>
+                <li><strong>Installed MCP Servers</strong> — список подключённых серверов с toggle on/off</li>
+                <li><strong>context7</strong> — актуальная документация библиотек (2 tools)</li>
+                <li><strong>firecrawl</strong> — скрейпинг веб-страниц (12 tools)</li>
+                <li><strong>sqlite-mcp</strong> — прямой доступ к БД (10 tools, 3 prompts, 2 resources)</li>
+                <li><strong>postgres-mcp</strong> — отключён, включается по необходимости</li>
+                <li><strong>+ New MCP Server</strong> — добавить свой сервер одной кнопкой</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 9g — SETTINGS: HOOKS
+         ======================================= -->
+    <section class="slide" data-slide="9g">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal" style="font-size: clamp(1.8rem, 4vw, 3rem);">Настройки: Hooks</h2>
+        <div class="settings-layout reveal">
+            <img src="img/settings-hooks.jpg" alt="Cursor Settings Hooks" class="settings-img">
+            <ul class="settings-notes">
+                <li><strong>Configured Hooks (2)</strong> — sessionStart и afterFileEdit подключены</li>
+                <li><strong>sessionStart</strong> → auto-commit.sh — коммитит изменения при старте нового чата</li>
+                <li><strong>afterFileEdit</strong> → lint.sh — запускает линтер после каждой правки агента</li>
+                <li><strong>Execution Log</strong> — полная история срабатываний хуков с таймингами</li>
+                <li>afterFileEdit: 579-719ms — линтер успевает за полсекунды</li>
+                <li>sessionStart: 85-279ms — коммит почти мгновенный</li>
+                <li><strong>Open project config</strong> — прямой доступ к hooks.json для редактирования</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 9h — SETTINGS: INDEXING & DOCS
+         ======================================= -->
+    <section class="slide" data-slide="9h">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal" style="font-size: clamp(1.8rem, 4vw, 3rem);">Настройки: Indexing &amp; Docs</h2>
+        <div class="settings-layout reveal">
+            <img src="img/settings-indexing-docs.jpg" alt="Cursor Settings Indexing Docs" class="settings-img">
+            <ul class="settings-notes">
+                <li><strong>Codebase Indexing: 100%</strong> — 107 файлов проиндексировано. Embeddings в облаке, код — локально</li>
+                <li><strong>Sync / Delete Index</strong> — принудительная переиндексация или сброс</li>
+                <li><strong>Index New Folders</strong> — автоиндексация новых папок (до 50K файлов)</li>
+                <li><strong>.cursorignore</strong> — Edit: исключения поверх .gitignore. Экономит токены!</li>
+                <li><strong>Instant Grep (Beta)</strong> — индексация для быстрого поиска. Данные хранятся локально</li>
+                <li><strong>Docs</strong> — подключённая документация: gotd, Dify. Используется через @Docs в чате</li>
+                <li><strong>+ Add Doc</strong> — добавить URL документации для индексации</li>
+            </ul>
         </div>
     </section>
 
@@ -963,25 +1127,38 @@
     <section class="slide" data-slide="12">
         <span class="slide-number reveal">12</span>
         <h2 class="reveal">Контекст — главное оружие</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">AI хорош настолько, насколько хорош контекст, который вы ему даёте</p>
-        <div class="card-grid">
-            <div class="card highlighted">
-                <h3>@Files / @Folders</h3>
-                <p>Подключайте конкретные файлы и папки к запросу. AI видит их содержимое и учитывает при генерации.</p>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Что попадает в контекст и когда</p>
+        <div class="steps stagger-list">
+            <div class="step">
+                <span class="step-number" style="background: var(--accent); color: #fff; font-size: 0.7rem;">ALL</span>
+                <div>
+                    <span class="step-text">Всегда в контексте</span>
+                    <p class="step-desc">Rules (alwaysApply) · AGENTS.md · MCP tools (описания) · Skills и Субагенты (name + description)</p>
+                </div>
             </div>
-            <div class="card">
-                <h3>@Codebase</h3>
-                <p>Поиск по всему проекту. AI найдёт релевантные файлы сам. Полезно для: «найди где используется X».</p>
+            <div class="step">
+                <span class="step-number" style="background: #ff8800; color: #fff; font-size: 0.65rem;">DYN</span>
+                <div>
+                    <span class="step-text">Загружается динамически</span>
+                    <p class="step-desc">Rules (globs / agent-decided) · Полный текст SKILL.md — когда агент решил применить</p>
+                </div>
             </div>
-            <div class="card">
-                <h3>@Docs</h3>
-                <p>Подключите документацию библиотек. AI будет писать код по актуальной документации, а не по устаревшим знаниям.</p>
+            <div class="step">
+                <span class="step-number" style="background: #0088ff; color: #fff; font-size: 0.65rem;">REQ</span>
+                <div>
+                    <span class="step-text">По требованию</span>
+                    <p class="step-desc">MCP tool results · Результат субагента (только итог) · scripts/ и references/ из skills</p>
+                </div>
             </div>
-            <div class="card">
-                <h3>@Web</h3>
-                <p>Поиск в интернете прямо из чата. Свежие решения, обновления библиотек, Stack Overflow.</p>
+            <div class="step">
+                <span class="step-number" style="background: #888; color: #fff;">@</span>
+                <div>
+                    <span class="step-text">Вы добавляете явно</span>
+                    <p class="step-desc">@file · @folder · @codebase · @docs · @web — чат и история диалога</p>
+                </div>
             </div>
         </div>
+        <p class="subtitle reveal" style="margin-top: 1rem;">Cursor загружает <strong>прогрессивно</strong> — не всё сразу, а когда нужно. Экономит контекстное окно.</p>
     </section>
 
     <!-- =======================================
@@ -990,20 +1167,27 @@
     <section class="slide" data-slide="13">
         <span class="slide-number reveal">13</span>
         <h2 class="reveal">.cursor/rules</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Правила для AI, которые работают на весь проект</p>
-        <div class="code-block reveal">
-            <span class="comment"># .cursor/rules/backend.mdc</span><br><br>
-            <span class="keyword">description:</span> <span class="string">Правила для backend-разработки</span><br>
-            <span class="keyword">globs:</span> <span class="string">src/api/**, src/db/**</span><br><br>
-            <span class="comment">## Стек</span><br>
-            - Используй TypeScript строго<br>
-            - База данных: PostgreSQL через Drizzle ORM<br>
-            - API: Next.js App Router (Route Handlers)<br><br>
-            <span class="comment">## Стиль</span><br>
-            - Обработка ошибок через try/catch с типизацией<br>
-            - Валидация входных данных через Zod<br>
-            - Никаких any — только явные типы
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Правила для AI, которые работают на весь проект</p>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Always Apply</h3>
+                <p>Загружается всегда. Стек, структура проекта, ключевые команды. Держите до 50 строк — каждая строка = токены.</p>
+            </div>
+            <div class="card">
+                <h3>Globs (Auto)</h3>
+                <p>Загружается при работе с файлами по маске. <code>*.tsx</code> для фронтенда, <code>src/api/**</code> для бэкенда.</p>
+            </div>
+            <div class="card">
+                <h3>Agent-decided</h3>
+                <p>Агент сам решает по description. Специализированные знания, которые нужны не всегда.</p>
+            </div>
+            <div class="card">
+                <h3>Manual (@rule)</h3>
+                <p>Только при явном упоминании через @. Редкие шаблоны и процедуры.</p>
+            </div>
         </div>
+        <p class="subtitle reveal" style="margin-top: 1rem;">Ссылайтесь на файлы (<code>@src/routes/users.ts</code>) вместо копирования кода в правило!</p>
+        <p class="subtitle reveal" style="margin-top: 0.3rem;">Создание: <code>/create-rule</code> прямо в чате Cursor</p>
     </section>
 
     <!-- =======================================
@@ -1039,6 +1223,88 @@
     </section>
 
     <!-- =======================================
+         SLIDE 14a — SKILLS
+         ======================================= -->
+    <section class="slide" data-slide="14a">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal">Skills</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Переиспользуемые процедуры для агента</p>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Что это</h3>
+                <p>Markdown-инструкции в <code>.cursor/skills/name/SKILL.md</code>. Пошаговые процедуры: «как делать X». В отличие от rules (что делать), skills — это как делать.</p>
+            </div>
+            <div class="card">
+                <h3>Когда загружается</h3>
+                <p>Агент видит name + description всех skills. Полный текст загружается когда релевантно или по <code>/skill-name</code>. Прогрессивно — не тратит контекст зря.</p>
+            </div>
+            <div class="card">
+                <h3>Что внутри</h3>
+                <p>YAML frontmatter (name, description) + markdown. Может включать scripts/, references/, assets/ — загружаются по требованию.</p>
+            </div>
+            <div class="card">
+                <h3>Создание</h3>
+                <p><code>/create-skill</code> в чате — Cursor проведёт через формат. Или вручную: <code>mkdir .cursor/skills/my-skill</code> + SKILL.md</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 14b — СУБАГЕНТЫ
+         ======================================= -->
+    <section class="slide" data-slide="14b">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal">Субагенты</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Параллельные агенты со своим контекстом</p>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Зачем</h3>
+                <p>Контекстная изоляция: шумный вывод остаётся в субагенте. Параллельность: несколько задач одновременно. Специализация: свой промпт и модель.</p>
+            </div>
+            <div class="card">
+                <h3>3 встроенных</h3>
+                <p><strong>Explore</strong> — поиск по коду (быстрая модель, параллельно). <strong>Bash</strong> — цепочки shell-команд. <strong>Browser</strong> — скриншоты и тесты UI.</p>
+            </div>
+            <div class="card">
+                <h3>Кастомные</h3>
+                <p><code>.cursor/agents/verifier.md</code> — YAML frontmatter (name, description, model, readonly) + промпт. Вызов: <code>/verifier проверь auth</code></p>
+            </div>
+            <div class="card">
+                <h3>Модели</h3>
+                <p><code>inherit</code> — как родитель. <code>fast</code> — быстрая/дешёвая. Конкретная модель по ID. <code>readonly: true</code> — только анализ.</p>
+            </div>
+        </div>
+        <p class="subtitle reveal" style="margin-top: 1rem;">Создание: <code>/create-subagent</code> прямо в чате Cursor</p>
+    </section>
+
+    <!-- =======================================
+         SLIDE 14c — HOOKS
+         ======================================= -->
+    <section class="slide" data-slide="14c">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal">Hooks</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Автоматические скрипты на события агента</p>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Что это</h3>
+                <p>Скрипты в <code>.cursor/hooks.json</code>, которые запускаются на события: после правки файла, перед командой, в начале сессии.</p>
+            </div>
+            <div class="card">
+                <h3>Ключевые события</h3>
+                <p><strong>sessionStart</strong> — начало сессии. <strong>afterFileEdit</strong> — после правки файла. <strong>beforeShellExecution</strong> — перед командой. <strong>stop</strong> — завершение.</p>
+            </div>
+            <div class="card">
+                <h3>Пример: автокоммит</h3>
+                <p>sessionStart → <code>git add -A && git commit</code>. Каждый новый чат начинается с чистого checkpoint. Всегда можно откатиться.</p>
+            </div>
+            <div class="card">
+                <h3>Пример: автолинт</h3>
+                <p>afterFileEdit → <code>pnpm lint</code>. Агент видит ошибки линтера и сам исправляет. Код всегда компилируется.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
          SLIDE 15 — ЭКОНОМИЯ ТОКЕНОВ
          ======================================= -->
     <section class="slide" data-slide="15">
@@ -1046,12 +1312,13 @@
         <h2 class="reveal">Экономия токенов</h2>
         <p class="subtitle reveal" style="margin-bottom: 1rem;">Как не сжечь бюджет за день</p>
         <ul class="content-list stagger-list">
-            <li><strong>Edit mode</strong> для мелких правок — дешевле агента в 5-10 раз</li>
-            <li><strong>Конкретный контекст</strong> — @file лучше @codebase (меньше токенов, точнее результат)</li>
-            <li><strong>Декомпозиция</strong> — маленькие задачи = маленький контекст = дешевле</li>
-            <li><strong>Новый чат</strong> — длинная история съедает токены. Закончил задачу → новый чат</li>
-            <li><strong>Модели для разных задач</strong> — Claude для архитектуры, быстрые модели для рутины</li>
-            <li><strong>Rules</strong> — не повторяйте одно и то же в каждом промпте</li>
+            <li><strong>.cursorignore</strong> — исключи node_modules, .next, dist из индексации. Как .gitignore для Cursor</li>
+            <li><strong>Новый чат после задачи</strong> — после 6-8 обменов история = 20-40K токенов. Чистый чат = чистый контекст</li>
+            <li><strong>Запрет лишних файлов</strong> — rule: «не создавай SUMMARY, CHANGELOG». Каждый File Edit перечитывает весь контекст</li>
+            <li><strong>Всё в первом сообщении</strong> — не размазывай контекст по 3 запросам. Один промпт с @file — дешевле</li>
+            <li><strong>Rules до 50 строк</strong> — alwaysApply = токены в каждом промпте. Ссылайся на @файлы, не копируй код</li>
+            <li><strong>Модель под задачу</strong> — Opus для архитектуры, Sonnet для кодинга, fast для рутины. Cmd+/</li>
+            <li><strong>@folder &gt; 10× @file</strong> — обзор структуры дешевле, агент сам решит что читать</li>
         </ul>
     </section>
 
@@ -1093,11 +1360,12 @@
         <span class="slide-number reveal">17</span>
         <h2 class="reveal">Best Practices</h2>
         <ul class="content-list stagger-list">
-            <li><strong>Промпт = ТЗ.</strong> Чем чётче описали задачу — тем лучше результат</li>
-            <li><strong>Итеративно.</strong> Не пытайтесь сделать всё за один промпт. Маленькие шаги</li>
-            <li><strong>Git.</strong> Коммитьте перед каждым крупным запросом к агенту</li>
-            <li><strong>Ревью.</strong> Всегда читайте diff. AI генерирует уязвимости и ненужный код</li>
-            <li><strong>Не доверяйте слепо.</strong> AI уверенно врёт. Проверяйте библиотеки, API-эндпоинты</li>
+            <li><strong>Rules → Plan → Agent.</strong> Сначала настрой правила, потом планируй, потом выполняй</li>
+            <li><strong>Git-checkpoint перед агентом.</strong> Hook sessionStart → auto-commit. Всегда можно откатиться</li>
+            <li><strong>afterFileEdit → lint.</strong> Агент видит ошибки линтера и исправляет сам</li>
+            <li><strong>Ревью каждого diff.</strong> AI генерирует уязвимости и ненужный код. Вы — архитектор</li>
+            <li><strong>Субагент-верификатор.</strong> /verifier после задачи — независимая проверка что реально работает</li>
+            <li><strong>Не доверяйте слепо.</strong> AI уверенно врёт. Проверяйте API, библиотеки, типы</li>
         </ul>
     </section>
 
@@ -1118,15 +1386,22 @@
             <div class="step">
                 <span class="step-number">02</span>
                 <div>
-                    <span class="step-text">Оживить свой прототип</span>
-                    <p class="step-desc">Подключить реальные данные, API, бэкенд</p>
+                    <span class="step-text">Настроить .cursor/rules + .cursorignore</span>
+                    <p class="step-desc">Rules: стек и конвенции. Ignore: исключить node_modules, dist, .next</p>
                 </div>
             </div>
             <div class="step">
                 <span class="step-number">03</span>
                 <div>
-                    <span class="step-text">Настроить .cursor/rules</span>
-                    <p class="step-desc">Добавить правила под свой проект и стек</p>
+                    <span class="step-text">Оживить прототип через Plan → Agent</span>
+                    <p class="step-desc">Верхнеуровневое описание → Plan декомпозирует → Agent выполняет</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-number">04</span>
+                <div>
+                    <span class="step-text">Создать skill или hook</span>
+                    <p class="step-desc">/create-skill для unit-тестов или hooks.json для автолинта</p>
                 </div>
             </div>
         </div>
