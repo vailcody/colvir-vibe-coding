@@ -797,34 +797,7 @@
     </section>
 
     <!-- =======================================
-         SLIDE 5 — DIFY: ЧТО ЭТО
-         ======================================= -->
-    <section class="slide" data-slide="5">
-        <span class="slide-number reveal">05</span>
-        <h2 class="reveal">Dify</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Визуальный конструктор AI-воркфлоу</p>
-        <div class="card-grid">
-            <div class="card highlighted">
-                <h3>Зачем?</h3>
-                <p>Сложные AI-пайплайны без кода: парсинг документов, генерация, классификация. Визуальный drag-and-drop билдер.</p>
-            </div>
-            <div class="card">
-                <h3>API из коробки</h3>
-                <p>Каждый воркфлоу получает REST API. Вызываем из своего приложения одним HTTP-запросом.</p>
-            </div>
-            <div class="card">
-                <h3>Наш кейс</h3>
-                <p>Загружаем спецификацию → парсим текст → LLM генерирует тест-кейсы → возвращаем JSON.</p>
-            </div>
-            <div class="card">
-                <h3>Альтернативы</h3>
-                <p>n8n, Make, Langflow. Dify — опенсорс, self-hosted, заточен на LLM-пайплайны.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- =======================================
-         SLIDE 5a — DIFY: НАШ ВОРКФЛОУ
+         SLIDE 5 — DIFY: НАШ ВОРКФЛОУ
          ======================================= -->
     <section class="slide" data-slide="5a">
         <span class="slide-number reveal">—</span>
@@ -856,18 +829,6 @@
     </section>
 
     <!-- =======================================
-         SLIDE 6 — LIVE DEMO: DIFY
-         ======================================= -->
-    <section class="slide center-slide" data-slide="6">
-        <div class="geo-square" style="width:200px;height:200px;bottom:5%;left:5%;opacity:0.08;"></div>
-        <div class="geo-line" style="width:3px;height:200px;top:10%;right:10%;"></div>
-        <span class="slide-number reveal">06</span>
-        <p class="subtitle reveal" style="margin-bottom: 0.5rem;">Live Demo</p>
-        <div class="dramatic reveal">Dify</div>
-        <p class="subtitle reveal" style="margin-top: 1rem;">Создаём воркфлоу и тестируем API</p>
-    </section>
-
-    <!-- =======================================
          SLIDE 7 — CURSOR: ЗНАКОМСТВО
          ======================================= -->
     <section class="slide" data-slide="7">
@@ -877,7 +838,7 @@
         <ul class="content-list stagger-list">
             <li><strong>Форк VS Code</strong> — все расширения и настройки работают</li>
             <li><strong>Семантический поиск</strong> — индексирует кодобазу, находит по смыслу, а не grep'ом</li>
-            <li><strong>Все модели</strong> — Claude, GPT-4o, Gemini, выбор под задачу</li>
+            <li><strong>Все модели</strong> — Claude Sonnet/Opus, GPT-5 Codex, Gemini, выбор под задачу</li>
             <li><strong>Agent Mode</strong> — AI сам читает файлы, пишет код, запускает команды</li>
             <li><strong>Субагенты</strong> — параллельные агенты со своим контекстом</li>
             <li><strong>Rules, Skills, Hooks</strong> — настрой поведение AI под проект</li>
@@ -886,32 +847,166 @@
     </section>
 
     <!-- =======================================
-         SLIDE 8 — РЕЖИМЫ CURSOR
+         SLIDE 7a — RULES: ПЕРВЫЙ ШАГ
+         ======================================= -->
+    <section class="slide" data-slide="7a">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal">Первый шаг: Rules</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Прежде чем что-то делать — настрой правила проекта</p>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Что включить</h3>
+                <p>Стек (фреймворки, ORM, DB). Структура проекта. Ключевые команды (dev, build, lint). Стиль кода (TypeScript strict, async/await).</p>
+            </div>
+            <div class="card">
+                <h3>Чего НЕ включать</h3>
+                <p>Общие советы по программированию. Длинные style guides (для этого есть линтер). Вещи которые AI и так знает (npm, git).</p>
+            </div>
+            <div class="card">
+                <h3>Best Practices</h3>
+                <p>До 50 строк. Ссылайтесь на файлы (<code>@src/routes/users.ts</code>) вместо копирования кода. Создание: <code>/create-rule</code></p>
+            </div>
+            <div class="card">
+                <h3>4 типа</h3>
+                <p><strong>Always Apply</strong> — всегда. <strong>Globs</strong> — по маске файла. <strong>Agent-decided</strong> — AI решает. <strong>Manual</strong> — по @упоминанию.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 7b — RULES: ПРОМПТ ДЛЯ СОЗДАНИЯ
+         ======================================= -->
+    <section class="slide" data-slide="7b">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal">Промпт: создание rules</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Агент сам создаст правила по кодовой базе</p>
+        <div class="code-block reveal">
+            <span class="comment">// В чате Cursor (режим Agent)</span><br><br>
+            Проанализируй текущий проект и создай<br>
+            .cursor/rules/project.mdc с alwaysApply: true.<br><br>
+            Включи:<br>
+            - Стек (фреймворки, ORM, база данных)<br>
+            - Структуру проекта (где что лежит)<br>
+            - Команды для запуска и сборки<br>
+            - Стиль кода и конвенции<br><br>
+            Правило должно быть до 50 строк.<br>
+            Не копируй код — ссылайся на файлы-примеры.
+        </div>
+    </section>
+
+    <!-- =======================================
+         SLIDE 8 — ЗОЛОТОЙ WORKFLOW
          ======================================= -->
     <section class="slide" data-slide="8">
         <span class="slide-number reveal">08</span>
-        <h2 class="reveal">Режимы работы</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1rem;">4 чат-режима + инлайн-редактор</p>
-        <div class="mode-grid">
-            <div class="mode-card active-mode">
-                <h3>Agent</h3>
-                <p>Автономный. Читает файлы, пишет код, запускает команды. Основной режим.</p>
+        <h2 class="reveal">Золотой workflow</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Как правильно работать с Cursor</p>
+        <div class="flow-diagram reveal" style="margin-bottom: 2rem;">
+            <div class="flow-node">Rules</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node highlighted">Ask</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node highlighted">Plan</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node highlighted" style="background: var(--accent); color: #fff;">Agent</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-node">Ask</div>
+        </div>
+        <div class="steps stagger-list">
+            <div class="step">
+                <span class="step-number">01</span>
+                <div>
+                    <span class="step-text">Rules — настрой правила проекта</span>
+                    <p class="step-desc">.cursor/rules — стек, конвенции, структура. Один раз — работает на все сессии</p>
+                </div>
             </div>
-            <div class="mode-card">
-                <h3>Plan</h3>
-                <p>Планирование. Создаёт план задачи, декомпозирует. Ты ревьюишь → «Build Plan».</p>
+            <div class="step">
+                <span class="step-number">02</span>
+                <div>
+                    <span class="step-text">Ask — собери контекст</span>
+                    <p class="step-desc">Спроси агента о кодовой базе: что замокано, где типы, какая структура</p>
+                </div>
             </div>
-            <div class="mode-card">
-                <h3>Ask</h3>
-                <p>Вопрос-ответ. Объяснить код, найти баг, предложить архитектуру. Файлы не трогает.</p>
+            <div class="step">
+                <span class="step-number">03</span>
+                <div>
+                    <span class="step-text">Plan — декомпозиция задачи</span>
+                    <p class="step-desc">Верхнеуровневое описание → агент разбивает на шаги. Ревью → Build Plan</p>
+                </div>
             </div>
-            <div class="mode-card">
-                <h3>Debug</h3>
-                <p>Анализ ошибок. Вставляешь ошибку — агент находит root cause и предлагает fix.</p>
+            <div class="step">
+                <span class="step-number">04</span>
+                <div>
+                    <span class="step-text">Agent — выполнение</span>
+                    <p class="step-desc">Агент выполняет план. Ревью каждого diff. Checkpoint → откат если что</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-number">05</span>
+                <div>
+                    <span class="step-text">Ask — итерация</span>
+                    <p class="step-desc">Проверь результат. Задай уточняющие вопросы. Новый цикл если нужно</p>
+                </div>
             </div>
         </div>
-        <p class="subtitle reveal" style="margin-top: 1rem;"><strong>⌘K</strong> — инлайн-редактирование: выдели код → опиши правку → мгновенный результат</p>
-        <p class="subtitle reveal" style="margin-top: 0.5rem; color: var(--accent); font-weight: 700;">Золотой workflow: Ask → Plan → Agent → Ask (итерация)</p>
+    </section>
+
+    <!-- =======================================
+         SLIDE 8a — РЕЖИМ ASK + ПРОМПТ
+         ======================================= -->
+    <section class="slide" data-slide="8a">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal">Режим: Ask</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Спроси перед тем как делать. Файлы не меняет.</p>
+        <div class="code-block reveal">
+            <span class="comment">// Промпт для исследования кодовой базы</span><br><br>
+            Проанализируй текущий проект и ответь:<br><br>
+            1. Какой стек используется?<br>
+            2. Какая структура проекта (папки, ключевые файлы)?<br>
+            3. Где данные замоканы, а где реальные?<br>
+            4. Какие API endpoints есть и что они делают?<br>
+            5. Какие зависимости установлены?<br>
+            6. Есть ли тесты? Если да — какой фреймворк?<br><br>
+            <span class="comment">Формат: краткий обзор, потом детали по каждому пункту.</span>
+        </div>
+        <p class="subtitle reveal" style="margin-top: 1rem;">Первый шаг после открытия нового проекта в Cursor</p>
+    </section>
+
+    <!-- =======================================
+         SLIDE 8b — РЕЖИМ PLAN
+         ======================================= -->
+    <section class="slide" data-slide="8b">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal">Режим: Plan</h2>
+        <p class="subtitle reveal" style="margin-bottom: 1rem;">Агент декомпозирует задачу. Ты ревьюишь и правишь план.</p>
+        <div class="code-block reveal">
+            <span class="comment">// Промпт для Plan mode — верхнеуровневый</span><br><br>
+            Оживи прототип. Сейчас данные замоканы. Нужно:<br>
+            - Бэкенд с реальной базой данных<br>
+            - Интеграция с Dify API для генерации тест-кейсов<br>
+            - Фронтенд работает с реальными данными вместо моков
+        </div>
+        <p class="subtitle reveal" style="margin-top: 1rem;">Три строки. Остальное Plan сам разложит. Потом → <strong>Build Plan</strong></p>
+    </section>
+
+    <!-- =======================================
+         SLIDE 8c — РЕЖИМЫ AGENT + DEBUG
+         ======================================= -->
+    <section class="slide" data-slide="8c">
+        <span class="slide-number reveal">—</span>
+        <h2 class="reveal">Режимы: Agent &amp; Debug</h2>
+        <div class="card-grid">
+            <div class="card highlighted">
+                <h3>Agent</h3>
+                <p>Автономный режим. Читает файлы, пишет код, запускает команды в терминале. Основной режим для вайб-кодинга.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Checkpoints: Cursor сохраняет снимок перед каждым изменением. Всегда можно откатиться.</p>
+            </div>
+            <div class="card">
+                <h3>Debug</h3>
+                <p>Анализ ошибок. Вставляешь ошибку или стектрейс — агент находит root cause и предлагает fix.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">Лайфхак: если ошибок нет при демо — сломай env-переменную, покажи как Debug починит.</p>
+            </div>
+        </div>
     </section>
 
     <!-- =======================================
