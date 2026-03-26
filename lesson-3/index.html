@@ -1081,16 +1081,16 @@
         <div class="code-block reveal" style="font-size: 0.8rem;">
             <span class="comment">// Пример: промпт-шаблон</span><br><br>
             {<br>
-            &nbsp;&nbsp;"name": "<strong>generate_test_cases</strong>",<br>
-            &nbsp;&nbsp;"description": "Generate test cases for a feature",<br>
+            &nbsp;&nbsp;"name": "<strong>delete_test_case</strong>",<br>
+            &nbsp;&nbsp;"description": "Delete a test case by its ID",<br>
             &nbsp;&nbsp;"arguments": [<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;{ "name": "feature", "description": "Feature to test", "required": true }<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;{ "name": "testCaseId", "description": "ID of test case to delete", "required": true }<br>
             &nbsp;&nbsp;]<br>
             }
         </div>
         <ul class="content-list stagger-list" style="margin-top: 1rem;">
             <li>Предготовленные промпты, которые <strong>пользователь выбирает</strong> (не LLM)</li>
-            <li>Как slash-команды: <code>/generate_test_cases feature="Login"</code></li>
+            <li>Как slash-команды: <code>/delete_test_case testCaseId="TC-001"</code></li>
             <li>Менее популярны, чем tools — но полезны для стандартных сценариев</li>
         </ul>
     </section>
