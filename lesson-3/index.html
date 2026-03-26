@@ -834,14 +834,13 @@
     <section class="slide" data-slide="12">
         <span class="slide-number reveal">05</span>
         <h2 class="reveal">Spec-Driven Development</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Спецификация = главный артефакт. Код — следствие.</p>
+        <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Спецификация — единый источник истины</p>
         <ul class="content-list stagger-list">
-            <li><strong>Промпт</strong> — одноразовый запрос, теряется после сессии</li>
+            <li><strong>Проблема промптов:</strong> одноразовые, теряются после сессии, не передаются между агентами</li>
             <li><strong>Спецификация</strong> — живой документ в репозитории, эволюционирует с проектом</li>
-            <li>SDD = <strong>следующая ступень</strong> после вайб-кодинга</li>
-            <li>Для прототипа → вайб-кодинг. Для production → <strong>SDD</strong></li>
+            <li>Акцент на <strong>что</strong> делаем и <strong>зачем</strong>, а не как — реализацию делает агент</li>
+            <li>SDD — это <strong>продвинутый уровень вайб-кодинга</strong>, когда нужна предсказуемость и воспроизводимость</li>
         </ul>
-        <p class="subtitle reveal" style="margin-top: 1.5rem; font-style: italic;">"Maintaining software means evolving specifications" — GitHub</p>
     </section>
 
     <!-- =======================================
@@ -860,16 +859,15 @@
             <div class="flow-node highlighted" style="background: var(--accent); color: #fff;">SDD</div>
         </div>
         <div class="card-grid">
-            <div class="card">
-                <h3>Vibe Coding</h3>
-                <p>⚡ Быстро, интуитивно. ❌ Непредсказуемо, не масштабируется.</p>
-            </div>
             <div class="card highlighted">
-                <h3>SDD</h3>
-                <p>✅ Предсказуемо, воспроизводимо, командная работа. 🐢 15-30 мин на спеку.</p>
+                <h3>Что даёт SDD</h3>
+                <p>Предсказуемость, воспроизводимость, передача контекста между агентами и сессиями. Спека живёт в репо — не теряется.</p>
+            </div>
+            <div class="card">
+                <h3>Спецификации генерируют код</h3>
+                <p>Код — не главный артефакт. Спецификация напрямую генерирует реализацию, а не просто направляет её.</p>
             </div>
         </div>
-        <p class="subtitle reveal" style="margin-top: 1rem;"><strong>Золотое правило:</strong> Прототип → вайб. Идея кристаллизовалась → SDD.</p>
     </section>
 
     <!-- =======================================
@@ -878,34 +876,24 @@
     <section class="slide" data-slide="14">
         <span class="slide-number reveal">07</span>
         <h2 class="reveal">SDD: Инструменты</h2>
-        <div class="steps stagger-list">
-            <div class="step">
-                <span class="step-number">🥇</span>
-                <div>
-                    <span class="step-text">Kiro (AWS)</span>
-                    <p class="step-desc">Первородитель. Отдельная IDE (форк VS Code). Requirements → Design → Tasks. Agent Hooks.</p>
-                </div>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Kiro (AWS)</h3>
+                <p>Первородитель подхода. Отдельная IDE (форк VS Code). Requirements → Design → Tasks. Agent Hooks для автоматизации.</p>
             </div>
-            <div class="step">
-                <span class="step-number">🥈</span>
-                <div>
-                    <span class="step-text">Spec Kit (GitHub)</span>
-                    <p class="step-desc">Open source CLI. Constitution → Specify → Plan → Tasks → Implement. TDD-first.</p>
-                </div>
+            <div class="card">
+                <h3>Spec Kit (GitHub)</h3>
+                <p>Open source CLI. Constitution → Specify → Plan → Tasks → Implement. Тяжеловесный, TDD-first, жёсткие фазы.</p>
             </div>
-            <div class="step highlighted">
-                <span class="step-number" style="background: var(--accent); color: #fff;">🥉</span>
-                <div>
-                    <span class="step-text">OpenSpec (Fission AI / YC)</span>
-                    <p class="step-desc">Лёгкий npm-пакет. Гибкий, без жёстких гейтов. 20+ AI-инструментов. Идеален для brownfield.</p>
-                </div>
+            <div class="card highlighted">
+                <h3>OpenSpec (Fission AI / YC)</h3>
+                <p>Лёгкий npm-пакет. Гибкий, без жёстких гейтов. 20+ AI-инструментов. Идеален для brownfield.</p>
             </div>
         </div>
         <div class="flow-diagram reveal" style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">
             <div class="flow-node" style="font-size: 0.75rem;">Tessl</div>
             <div class="flow-node" style="font-size: 0.75rem;">BMAD</div>
             <div class="flow-node" style="font-size: 0.75rem;">AIDE</div>
-            <div class="flow-node" style="font-size: 0.75rem;">Kiro Radar</div>
         </div>
     </section>
 
