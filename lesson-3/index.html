@@ -1217,41 +1217,12 @@
         </ul>
     </section>
 
-    <!-- =======================================
-         SLIDE — API KEYS: КАК ПРАВИЛЬНО
-         ======================================= -->
-    <section class="slide" data-slide="api-keys">
-        <span class="slide-number reveal">23</span>
-        <h2 class="reveal">API Keys: два подхода</h2>
-        <p class="subtitle reveal" style="margin-bottom: 1rem;">Ключ не в коде сервера — в конфиге клиента</p>
-        <div class="card-grid">
-            <div class="card" style="border-left: 4px solid #ff8800;">
-                <h3>env в mcp.json</h3>
-                <div class="code-block" style="font-size: 0.7rem; margin-top: 0.5rem;">
-                    "env": { "API_KEY": "sk-abc123..." }<br>
-                    <span class="comment">// Ключ в конфиге клиента, не в коде</span><br>
-                    <span class="comment">// Работает везде: Cursor, Claude Desktop</span>
-                </div>
-            </div>
-            <div class="card highlighted" style="border-left: 4px solid #00cc44;">
-                <h3>🔒 promptString</h3>
-                <div class="code-block" style="font-size: 0.7rem; margin-top: 0.5rem;">
-                    { "type": "promptString",<br>
-                    &nbsp;&nbsp;"id": "api-key",<br>
-                    &nbsp;&nbsp;"password": true }<br>
-                    <span class="comment">// Ключ нигде не хранится!</span><br>
-                    <span class="comment">// IDE спрашивает при каждом запуске</span>
-                </div>
-            </div>
-        </div>
-        <p class="subtitle reveal" style="margin-top: 1rem;"><code>promptString</code> — фича VS Code-based IDE (Cursor, Windsurf, VS Code). В сервере одинаково: <code>process.env.API_KEY</code></p>
-    </section>
 
     <!-- =======================================
          SLIDE 20 — MCP SERVER: КОД
          ======================================= -->
     <section class="slide" data-slide="20">
-        <span class="slide-number reveal">24</span>
+        <span class="slide-number reveal">23</span>
         <h2 class="reveal">MCP-сервер: минимальный код</h2>
         <div class="code-block reveal" style="font-size: 0.7rem;">
             <span class="comment">// src/index.ts — Hello World MCP</span><br><br>
@@ -1283,7 +1254,7 @@
          SLIDE 21 — ПОДКЛЮЧЕНИЕ К CURSOR
          ======================================= -->
     <section class="slide" data-slide="21">
-        <span class="slide-number reveal">25</span>
+        <span class="slide-number reveal">24</span>
         <h2 class="reveal">Подключаем к Cursor</h2>
         <p class="subtitle reveal" style="margin-bottom: 1rem;">Один JSON-файл — и агент видит ваш сервер</p>
         <div class="code-block reveal" style="font-size: 0.8rem;">
@@ -1311,7 +1282,7 @@
          SLIDE 22 — ДОМАШНЕЕ ЗАДАНИЕ
          ======================================= -->
     <section class="slide" data-slide="22">
-        <span class="slide-number reveal">26</span>
+        <span class="slide-number reveal">25</span>
         <h2 class="reveal">Домашнее задание</h2>
         <div class="steps stagger-list">
             <div class="step">
@@ -1342,7 +1313,7 @@
          SLIDE 23 — ЗАНЯТИЕ 4 PREVIEW
          ======================================= -->
     <section class="slide" data-slide="23">
-        <span class="slide-number reveal">27</span>
+        <span class="slide-number reveal">26</span>
         <h2 class="reveal">Следующее занятие</h2>
         <p class="subtitle reveal" style="margin-bottom: 1.5rem;">Занятие 4: Деплой и AI-ассистент</p>
         <div class="card-grid">
@@ -1363,7 +1334,7 @@
     <section class="slide center-slide" data-slide="24">
         <div class="geo-line" style="width:300px;height:3px;top:20%;right:10%;"></div>
         <div class="geo-line" style="width:200px;height:3px;bottom:25%;left:8%;"></div>
-        <span class="slide-number reveal">28</span>
+        <span class="slide-number reveal">27</span>
         <h2 class="reveal" style="font-size: clamp(2rem, 5vw, 3.5rem);">Спасибо!</h2>
         <p class="subtitle reveal" style="margin-top: 1rem;">Вопросы?</p>
     </section>
