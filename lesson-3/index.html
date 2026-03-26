@@ -1037,26 +1037,36 @@
         <span class="slide-number reveal">16</span>
         <h2 class="reveal">MCP: Resources</h2>
         <p class="subtitle reveal" style="margin-bottom: 1rem;">Read-only данные для контекста агента</p>
-        <div class="code-block reveal" style="font-size: 0.75rem;">
-            <span class="comment">// URI — просто имя ресурса. Сервер сам знает где взять данные.</span><br><br>
-            server.<strong>resource</strong>("db-schema", "db://schema/test_cases",<br>
-            &nbsp;&nbsp;async () => {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Сервер сам ходит в БД и достаёт структуру</span><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;const schema = await db.query(<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"SELECT column_name, data_type FROM information_schema.columns..."<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;);<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;return { contents: [{ uri: "db://schema/test_cases", text: JSON.stringify(schema) }] };<br>
-            &nbsp;&nbsp;}<br>
+        <div class="code-block reveal" style="font-size: 0.68rem;">
+            server.<strong>registerResource</strong>(<br>
+            &nbsp;&nbsp;'server-status',<br>
+            &nbsp;&nbsp;'status://server',<br>
+            &nbsp;&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;title: 'Server Status',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;description: 'Current server status and uptime',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;mimeType: 'application/json'<br>
+            &nbsp;&nbsp;},<br>
+            &nbsp;&nbsp;async (uri) => ({<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;contents: [{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri: uri.href,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text: JSON.stringify({<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status: 'running',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uptime: process.uptime(),<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodeVersion: process.version,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memoryMB: Math.round(process.memoryUsage().heapUsed / 1024 / 1024)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}, null, 2)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}]<br>
+            &nbsp;&nbsp;})<br>
             );
         </div>
-        <div class="card-grid" style="margin-top: 1rem;">
+        <div class="card-grid" style="margin-top: 0.8rem;">
             <div class="card highlighted">
                 <h3>URI ≠ адрес</h3>
-                <p>Как REST endpoint <code>/api/users</code> — клиенту неважно, что внутри PostgreSQL. Сервер сам решает где взять данные.</p>
+                <p>Как REST endpoint <code>/api/users</code> — клиенту неважно, что внутри. Сервер сам решает где взять данные.</p>
             </div>
             <div class="card">
                 <h3>Resources vs Tools</h3>
-                <p>Resources = read-only контекст (схема БД, конфиг, OpenAPI-спека). Tools = действия (создать, удалить, изменить).</p>
+                <p>Resources = read-only контекст. Tools = действия (создать, удалить, изменить).</p>
             </div>
         </div>
     </section>
