@@ -31,7 +31,7 @@ Ask (исследование) → Plan (декомпозиция) → Agent (р
 - Работают в облаке автономно, не требуют IDE
 - Пример: Cursor использует внутри компании для секьюрити-ревью 3000+ PR в неделю
 - 4 шаблона безопасности: Agentic Security Review, Vuln Hunter, Anybump (патчинг зависимостей), Invariant Sentinel
-- **Для Колвира**: автоматическое ревью безопасности кода — killer feature для банковского софта
+- **Для а**: автоматическое ревью безопасности кода — killer feature для банковского софта
 
 ### 2. Plugins & Marketplace (v2.5+)
 - 30+ партнёров: Atlassian, AWS, Figma, Linear, Stripe, Datadog, GitLab, Hugging Face, PlanetScale, monday.com
@@ -100,7 +100,7 @@ Ask (исследование) → Plan (декомпозиция) → Agent (р
 - **globs** — применяется только к файлам по маске
 - **description** — когда Cursor должен подтянуть правило автоматически
 
-### Пример для Колвира:
+### Пример для а:
 ```markdown
 ---
 alwaysApply: true
@@ -143,7 +143,7 @@ alwaysApply: true
 
 ---
 
-## Best Practices для разработчиков Колвира
+## Best Practices для разработчиков а
 
 1. **Privacy Mode** — включить обязательно (банковский софт)
 2. **Rules** — сразу настроить .cursor/rules с правилами безопасности
