@@ -1,0 +1,56 @@
+/* ===========================================
+   PRINT / PDF SUPPORT
+   Each slide fits on one printed page
+   =========================================== */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 1cm;
+  }
+
+  html {
+    scroll-snap-type: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  body::before {
+    display: none !important;
+  }
+
+  .progress-bar,
+  .nav-dots,
+  .keyboard-hint {
+    display: none !important;
+  }
+
+  .slide {
+    min-height: auto !important;
+    height: 100vh;
+    page-break-after: always;
+    break-after: page;
+    scroll-snap-align: unset;
+    padding-right: var(--slide-padding) !important;
+    overflow: hidden;
+  }
+
+  .slide:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* Remove all animations in print */
+  .reveal, .reveal-left, .reveal-scale,
+  .card, .cost-card, .mode-card, .strategy-card,
+  .step, .wireframe,
+  .stagger-list li {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    transition-delay: 0s !important;
+  }
+
+  /* Geometric decorations */
+  .geo-square, .geo-line, .geo-outline {
+    display: none !important;
+  }
+}
