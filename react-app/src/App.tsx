@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Landing from './pages/Landing'
 import Lesson1Page from './lessons/lesson-1/Lesson1'
 import Lesson2Page from './lessons/lesson-2/Lesson2'
+import Lesson3Page from './lessons/lesson-3/Lesson3'
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <Route path="/" element={<Landing />} />
       <Route path="/lesson-1" element={<Lesson1Page />} />
       <Route path="/lesson-2" element={<Lesson2Page />} />
+      <Route path="/lesson-3" element={<Lesson3Page />} />
     </Routes>
   )
 }
