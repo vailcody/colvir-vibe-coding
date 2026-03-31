@@ -5,6 +5,7 @@ import Lesson1Page from './lessons/lesson-1/Lesson1'
 import Lesson2Page from './lessons/lesson-2/Lesson2'
 import Lesson3Page from './lessons/lesson-3/Lesson3'
 import CentralUniversityPage from './lessons/central-university/CentralUniversity'
+import CentralUniversity2Page from './lessons/central-university-2/CentralUniversity2'
 
 const courseLessons = [
   { to: '/lesson-1', title: 'Занятие 1', description: 'Создаём прототип', meta: '1 час · 19 марта' },
@@ -14,6 +15,7 @@ const courseLessons = [
 
 const centralUniversityLessons = [
   { to: '/central-university/lecture', title: 'Лекция', description: 'Вайб-кодинг: от идеи до продукта', meta: '1.5 часа · 30 марта' },
+  { to: '/central-university/lecture-2', title: 'Лекция 2', description: 'От прототипа к продукту', meta: '2 часа · 31 марта' },
 ]
 
 export default function App() {
@@ -26,6 +28,7 @@ export default function App() {
       <Route path="/lesson-2" element={<Lesson2Page />} />
       <Route path="/lesson-3" element={<Lesson3Page />} />
       <Route path="/central-university/lecture" element={<CentralUniversityPage />} />
+      <Route path="/central-university/lecture-2" element={<CentralUniversity2Page />} />
     </Routes>
   )
 }
