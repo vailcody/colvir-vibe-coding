@@ -21,7 +21,7 @@ export default function Slide07CICD({}: SlideProps) {
         </div>
         <div className="card">
           <h3>На практике</h3>
-          <p>Есть решения проще GitHub Actions — платформы вроде Vercel и Netlify делают CI/CD автоматически при подключении репозитория.</p>
+          <p>Есть PaaS-сервисы, которые делают CI/CD автоматически при подключении репозитория.</p>
         </div>
       </div>
     </>
