@@ -13,6 +13,7 @@ import Slide08Niche from './slides/Slide08Niche'
 import Slide09CaseVPN from './slides/Slide09CaseVPN'
 import Slide10CaseDenis from './slides/Slide10CaseDenis'
 import Slide11Perplexity from './slides/Slide11Perplexity'
+import Slide11bWhyAnalyze from './slides/Slide11bWhyAnalyze'
 import Slide12Miro from './slides/Slide12Miro'
 import Slide13MicroSaaS from './slides/Slide13MicroSaaS'
 import Slide13bErrorCost from './slides/Slide13bErrorCost'
@@ -32,6 +33,7 @@ const slides: ComponentType<SlideProps>[] = [
   Slide09CaseVPN,
   Slide10CaseDenis,
   Slide11Perplexity,
+  Slide11bWhyAnalyze,
   Slide12Miro,
   Slide13MicroSaaS,
   Slide14Tools,
