@@ -15,23 +15,7 @@ export default function Slide04Freelance({}: SlideProps) {
           <li>Сегментироваться по типу продукта или нише</li>
         </ul>
       </div>
-      <div className="reveal">
-        <h3 style={{ marginBottom: '0.75rem' }}>Фриланс площадки в 2026 году</h3>
-        <div className="card-row">
-          <div className="cost-card">
-            <span style={{ fontSize: '1.5rem' }}>⚠️</span>
-            <div className="cost-label">Требуется много времени на поиск заказов</div>
-          </div>
-          <div className="cost-card">
-            <span style={{ fontSize: '1.5rem' }}>⚠️</span>
-            <div className="cost-label">Высокая конкуренция</div>
-          </div>
-          <div className="cost-card">
-            <span style={{ fontSize: '1.5rem' }}>⚠️</span>
-            <div className="cost-label">Крайне низкие чеки</div>
-          </div>
-        </div>
-      </div>
+
     </>
   )
 }
