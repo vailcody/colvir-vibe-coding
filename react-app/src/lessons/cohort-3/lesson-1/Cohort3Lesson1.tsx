@@ -10,6 +10,7 @@ import Slide05Hire from './slides/Slide05Hire'
 import Slide06Templates from './slides/Slide06Templates'
 import Slide07SaaS from './slides/Slide07SaaS'
 import Slide08Niche from './slides/Slide08Niche'
+import Slide08bNicheCriteria from './slides/Slide08bNicheCriteria'
 import Slide09CaseVPN from './slides/Slide09CaseVPN'
 import Slide10CaseDenis from './slides/Slide10CaseDenis'
 import Slide11Perplexity from './slides/Slide11Perplexity'
@@ -29,6 +30,7 @@ const slides: ComponentType<SlideProps>[] = [
   Slide06Templates,
   Slide07SaaS,
   Slide08Niche,
+  Slide08bNicheCriteria,
   Slide09CaseVPN,
   Slide10CaseDenis,
   Slide11Perplexity,
