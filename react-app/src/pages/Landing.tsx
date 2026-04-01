@@ -8,6 +8,12 @@ const venues = [
     meta: '3 занятия',
   },
   {
+    to: '/cohort-3',
+    title: '3-й поток',
+    description: 'Вайб-кодинг: 3-й поток курса',
+    meta: '2026',
+  },
+  {
     to: '/central-university',
     title: 'Центральный университет',
     description: 'Вайб-кодинг: от идеи до продукта',
