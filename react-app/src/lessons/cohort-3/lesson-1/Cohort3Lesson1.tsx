@@ -3,57 +3,41 @@ import type { SlideProps } from '../../../components/PresentationShell'
 import type { ComponentType } from 'react'
 
 import Slide01Title from './slides/Slide01Title'
-import Slide02Author from './slides/Slide02Author'
-import Slide03Plan from './slides/Slide03Plan'
-import Slide04Tweet from './slides/Slide04Tweet'
-import Slide05PhraseVizhu from './slides/Slide05PhraseVizhu'
-import Slide06PhraseGovoryu from './slides/Slide06PhraseGovoryu'
-import Slide07PhraseZapuskayu from './slides/Slide07PhraseZapuskayu'
-import Slide08PhraseWorks from './slides/Slide08PhraseWorks'
-import Slide09Meme from './slides/Slide09Meme'
-import Slide10Reasons from './slides/Slide10Reasons'
-import Slide11SimplEnd from './slides/Slide11SimplEnd'
-import Slide12Evolution from './slides/Slide12Evolution'
-import Slide13Available from './slides/Slide13Available'
-import Slide14Possibilities from './slides/Slide14Possibilities'
-import Slide15Limitations from './slides/Slide15Limitations'
-import Slide16Map from './slides/Slide16Map'
-import Slide17ErrorCost from './slides/Slide17ErrorCost'
-import Slide18Methodology from './slides/Slide18Methodology'
-import Slide19BrowserAgents from './slides/Slide19BrowserAgents'
-import Slide20Harvi from './slides/Slide20Harvi'
-import Slide21Compare from './slides/Slide21Compare'
-import Slide22Practice from './slides/Slide22Practice'
-import Slide23LiveDemo from './slides/Slide23LiveDemo'
-import Slide24WhatNext from './slides/Slide24WhatNext'
-import Slide25Summary from './slides/Slide25Summary'
+import Slide02Plan from './slides/Slide02Plan'
+import Slide03Monetization from './slides/Slide03Monetization'
+import Slide04Freelance from './slides/Slide04Freelance'
+import Slide05Hire from './slides/Slide05Hire'
+import Slide06Templates from './slides/Slide06Templates'
+import Slide07SaaS from './slides/Slide07SaaS'
+import Slide08Niche from './slides/Slide08Niche'
+import Slide09CaseVPN from './slides/Slide09CaseVPN'
+import Slide10CaseDenis from './slides/Slide10CaseDenis'
+import Slide11Perplexity from './slides/Slide11Perplexity'
+import Slide12Miro from './slides/Slide12Miro'
+import Slide13MicroSaaS from './slides/Slide13MicroSaaS'
+import Slide13bErrorCost from './slides/Slide13bErrorCost'
+import Slide13cBrowserAgents from './slides/Slide13cBrowserAgents'
+import Slide14Tools from './slides/Slide14Tools'
+import Slide15Homework from './slides/Slide15Homework'
 
 const slides: ComponentType<SlideProps>[] = [
   Slide01Title,
-  Slide02Author,
-  Slide03Plan,
-  Slide04Tweet,
-  Slide05PhraseVizhu,
-  Slide06PhraseGovoryu,
-  Slide07PhraseZapuskayu,
-  Slide08PhraseWorks,
-  Slide09Meme,
-  Slide10Reasons,
-  Slide11SimplEnd,
-  Slide12Evolution,
-  Slide13Available,
-  Slide14Possibilities,
-  Slide15Limitations,
-  Slide16Map,
-  Slide17ErrorCost,
-  Slide18Methodology,
-  Slide19BrowserAgents,
-  Slide20Harvi,
-  Slide21Compare,
-  Slide22Practice,
-  Slide23LiveDemo,
-  Slide24WhatNext,
-  Slide25Summary,
+  Slide02Plan,
+  Slide03Monetization,
+  Slide04Freelance,
+  Slide05Hire,
+  Slide06Templates,
+  Slide07SaaS,
+  Slide08Niche,
+  Slide09CaseVPN,
+  Slide10CaseDenis,
+  Slide11Perplexity,
+  Slide12Miro,
+  Slide13MicroSaaS,
+  Slide13bErrorCost,
+  Slide13cBrowserAgents,
+  Slide14Tools,
+  Slide15Homework,
 ]
 
 export default function Cohort3Lesson1Page() {

@@ -1,9 +1,9 @@
 import type { SlideProps } from '../../../../components/PresentationShell'
 
-export default function Slide19BrowserAgents({}: SlideProps) {
+export default function Slide13cBrowserAgents({}: SlideProps) {
   return (
     <>
-      <span className="slide-number reveal">09</span>
+      <span className="slide-number reveal">13c</span>
       <h2 className="reveal">Почему браузерные агенты?</h2>
       <ul className="content-list stagger-list">
         <li><strong>Ничего не нужно устанавливать</strong> — ни среду разработки, ни языки программирования, ни подписки. Всё работает в браузере.</li>

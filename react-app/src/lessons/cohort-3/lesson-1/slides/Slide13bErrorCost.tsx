@@ -1,10 +1,10 @@
 import type { SlideProps } from '../../../../components/PresentationShell'
 
-export default function Slide17ErrorCost({}: SlideProps) {
+export default function Slide13bErrorCost({}: SlideProps) {
   return (
     <>
-      <div className="geo-line" style={{ position: 'absolute', width: 250, height: 3, bottom: '15%', left: '5%', background: 'var(--text-primary)', zIndex: -1 }} />
-      <span className="slide-number reveal">07</span>
+      <div className="geo-line" style={{ width: 250, height: 3, bottom: '15%', left: '5%' }} />
+      <span className="slide-number reveal">13b</span>
       <h2 className="reveal">Цена ошибки</h2>
       <div className="card-row">
         <div className="cost-card">
