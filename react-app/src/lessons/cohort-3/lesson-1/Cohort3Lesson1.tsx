@@ -36,9 +36,9 @@ const slides: ComponentType<SlideProps>[] = [
   Slide11Perplexity,
   Slide12Miro,
   Slide13MicroSaaS,
-  Slide13bErrorCost,
-  Slide13cBrowserAgents,
   Slide14Tools,
+  Slide13cBrowserAgents,
+  Slide13bErrorCost,
   Slide15Homework,
 ]
 
