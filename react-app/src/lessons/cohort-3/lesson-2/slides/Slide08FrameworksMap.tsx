@@ -9,7 +9,7 @@ export default function Slide08FrameworksMap({}: SlideProps) {
       <h2 className="reveal">Карта фреймворков</h2>
       <div className="map-container reveal">
         <img
-          src={`${BASE}cohort-3/lesson-9/frameworks-map.jpg`}
+          src={`${BASE}cohort-3/lesson-2/frameworks-map.jpg`}
           alt="Карта фреймворков вайб-кодера"
           className="map-img"
         />

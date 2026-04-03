@@ -34,6 +34,6 @@ const slides: ComponentType<SlideProps>[] = [
   Slide14Homework,
 ]
 
-export default function Cohort3Lesson9Page() {
+export default function Cohort3Lesson2Page() {
   return <PresentationShell slides={slides} />
 }
