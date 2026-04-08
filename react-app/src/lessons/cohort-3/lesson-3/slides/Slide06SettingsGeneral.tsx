@@ -1,13 +1,13 @@
 import type { SlideProps } from '../../../../components/PresentationShell'
 
-const BASE = '/cohort-3/lesson-3/'
+const BASE = import.meta.env.BASE_URL
 
 export default function Slide06SettingsGeneral({}: SlideProps) {
   return (
     <>
       <span className="slide-number reveal">05</span>
       <h2 className="reveal">Настройки: General</h2>
-      <img src={`${BASE}img/settings-general.jpg`} alt="Cursor Settings General" className="slide-image reveal" />
+      <img src={`${BASE}cohort-3/lesson-3/img/settings-general.jpg`} alt="Cursor Settings General" className="settings-img" />
       <ul className="content-list stagger-list">
         <li><strong>Privacy / Data Sharing</strong> — «Share Data» означает ваш код может использоваться для обучения. Для корпоративных проектов — выключить!</li>
         <li><strong>Completion Sound</strong> — звук когда агент закончил. Удобно при фоновой работе</li>

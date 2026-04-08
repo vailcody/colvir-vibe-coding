@@ -1,13 +1,13 @@
 import type { SlideProps } from '../../../../components/PresentationShell'
 
-const BASE = '/cohort-3/lesson-3/'
+const BASE = import.meta.env.BASE_URL
 
 export default function Slide12Hooks({}: SlideProps) {
   return (
     <>
       <span className="slide-number reveal">11</span>
       <h2 className="reveal">Настройки: Hooks</h2>
-      <img src={`${BASE}img/settings-hooks.jpg`} alt="Cursor Settings Hooks" className="slide-image reveal" />
+      <img src={`${BASE}cohort-3/lesson-3/img/settings-hooks.jpg`} alt="Cursor Settings Hooks" className="settings-img" />
       <ul className="content-list stagger-list">
         <li><strong>Configured Hooks (2)</strong> — sessionStart и afterFileEdit подключены</li>
         <li><strong>sessionStart</strong> → auto-commit.sh — коммитит изменения при старте нового чата</li>

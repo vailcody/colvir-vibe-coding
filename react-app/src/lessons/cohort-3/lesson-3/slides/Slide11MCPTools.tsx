@@ -1,13 +1,13 @@
 import type { SlideProps } from '../../../../components/PresentationShell'
 
-const BASE = '/cohort-3/lesson-3/'
+const BASE = import.meta.env.BASE_URL
 
 export default function Slide11MCPTools({}: SlideProps) {
   return (
     <>
       <span className="slide-number reveal">10</span>
       <h2 className="reveal">Настройки: Tools & MCP</h2>
-      <img src={`${BASE}img/settings-tools-mcp.jpg`} alt="Cursor Settings Tools MCP" className="slide-image reveal" />
+      <img src={`${BASE}cohort-3/lesson-3/img/settings-tools-mcp.jpg`} alt="Cursor Settings Tools MCP" className="settings-img" />
       <ul className="content-list stagger-list">
         <li><strong>Browser Automation</strong> — подключение к Browser Tab. Агент делает скриншоты и тестирует UI</li>
         <li><strong>Show Localhost Links</strong> — автооткрытие localhost ссылок в браузерной вкладке Cursor</li>

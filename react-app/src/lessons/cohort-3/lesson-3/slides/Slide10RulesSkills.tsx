@@ -1,13 +1,13 @@
 import type { SlideProps } from '../../../../components/PresentationShell'
 
-const BASE = '/cohort-3/lesson-3/'
+const BASE = import.meta.env.BASE_URL
 
 export default function Slide10RulesSkills({}: SlideProps) {
   return (
     <>
       <span className="slide-number reveal">09</span>
       <h2 className="reveal">Настройки: Rules, Skills, Subagents</h2>
-      <img src={`${BASE}img/settings-rules-skills.jpg`} alt="Cursor Settings Rules Skills" className="slide-image reveal" />
+      <img src={`${BASE}cohort-3/lesson-3/img/settings-rules-skills.jpg`} alt="Cursor Settings Rules Skills" className="settings-img" />
       <ul className="content-list stagger-list">
         <li><strong>Rules</strong> — все правила проекта. Видно текст каждого rule. Кнопка «+ New» для создания</li>
         <li><strong>AGENTS</strong> — AGENTS.md файл как альтернатива .cursor/rules</li>
