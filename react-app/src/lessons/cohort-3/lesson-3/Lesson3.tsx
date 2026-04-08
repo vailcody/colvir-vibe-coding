@@ -19,6 +19,7 @@ import Slide16RulesPrompt from './slides/Slide16RulesPrompt'
 import Slide17Ask from './slides/Slide17Ask'
 import Slide18Plan from './slides/Slide18Plan'
 import Slide19AgentDebug from './slides/Slide19AgentDebug'
+import Slide20Context from './slides/Slide20Context'
 import Slide20ContextKing from './slides/Slide20ContextKing'
 import Slide21MCP from './slides/Slide21MCP'
 import Slide22Skills from './slides/Slide22Skills'
@@ -44,6 +45,7 @@ const slides: ComponentType<SlideProps>[] = [
   Slide17Ask,
   Slide18Plan,
   Slide19AgentDebug,
+  Slide20Context,
   Slide20ContextKing,
   Slide21MCP,
   Slide22Skills,
