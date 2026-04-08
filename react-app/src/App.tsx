@@ -24,7 +24,7 @@ const centralUniversityLessons = [
 const cohort3Lessons = [
   { to: '/cohort-3/lesson-1', title: 'Занятие 1', description: 'Создаём прототип', meta: '3-й поток' },
   { to: '/cohort-3/lesson-2', title: 'Занятие 2', description: 'Мобильная разработка', meta: 'React Native + Expo + FastAPI' },
-  { to: '/cohort-3/lesson-3', title: 'Занятие 3', description: 'SDD + свой MCP-сервер', meta: 'OpenSpec + MCP + практика' },
+  { to: '/cohort-3/lesson-3', title: 'Занятие 3', description: 'Оживляем прототип в Cursor', meta: 'Dify + Rules + MCP + субагенты' },
 ]
 
 export default function App() {

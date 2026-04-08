@@ -13,7 +13,7 @@ export default function Slide25Tokens({}: SlideProps) {
         <li><strong>Всё в первом сообщении</strong> — не размазывай контекст по 3 запросам. Один промпт с @file — дешевле</li>
         <li><strong>Rules до 50 строк</strong> — alwaysApply = токены в каждом промпте. Ссылайся на @файлы, не копируй код</li>
         <li><strong>Модель под задачу</strong> — Opus для архитектуры, Sonnet для кодинга, fast для рутины. Cmd+/</li>
-        <li><strong>@folder > 10× @file</strong> — обзор структуры дешевле, агент сам решит что читать</li>
+        <li><strong>@folder → 10× @file</strong> — обзор структуры дешевле, агент сам решит что читать</li>
       </ul>
     </>
   )

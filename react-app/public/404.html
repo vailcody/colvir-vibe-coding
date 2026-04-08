@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <script>
-    // SPA redirect for GitHub Pages
-    // Redirects all paths to index.html with the path as a query param
-    var path = window.location.pathname;
-    // Only redirect React app routes, not static HTML presentations
-    var staticPaths = ['/vibe-coding/lesson-1/', '/vibe-coding/lesson-2/', '/vibe-coding/lesson-3/', '/vibe-coding/lecture-central-university/', '/vibe-coding/pdf/'];
-    var isStatic = staticPaths.some(function(p) { return path.startsWith(p); });
-    if (!isStatic) {
-      window.location.replace('/vibe-coding/?redirect=' + encodeURIComponent(path));
-    }
-  </script>
-</head>
-<body></body>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вайб-кодинг — курс</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+      // SPA redirect for GitHub Pages
+      // HashRouter: /vibe-coding/path → /vibe-coding/#/path
+      var path = window.location.pathname.replace(/\/$/, '');
+      var base = '/vibe-coding';
+      if (path.startsWith(base)) {
+        path = path.slice(base.length);
+      }
+      if (path === '') path = '/';
+      var hashPath = path.split('/').filter(Boolean).join('/');
+      var newUrl = base + '/#/' + hashPath;
+      window.location.replace(newUrl + window.location.search);
+    </script>
+  </head>
+  <body></body>
 </html>
