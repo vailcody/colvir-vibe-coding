@@ -12,6 +12,7 @@ import Slide10RulesSkills from './slides/Slide10RulesSkills'
 import Slide11MCPTools from './slides/Slide11MCPTools'
 import Slide12Hooks from './slides/Slide12Hooks'
 import Slide13Indexing from './slides/Slide13Indexing'
+import SlideGitWorkflow from './slides/SlideGitWorkflow'
 import Slide14GoldenWorkflow from './slides/Slide14GoldenWorkflow'
 import Slide15Rules from './slides/Slide15Rules'
 import Slide16RulesPrompt from './slides/Slide16RulesPrompt'
@@ -36,6 +37,7 @@ const slides: ComponentType<SlideProps>[] = [
   Slide11MCPTools,
   Slide12Hooks,
   Slide13Indexing,
+  SlideGitWorkflow,
   Slide14GoldenWorkflow,
   Slide15Rules,
   Slide16RulesPrompt,
