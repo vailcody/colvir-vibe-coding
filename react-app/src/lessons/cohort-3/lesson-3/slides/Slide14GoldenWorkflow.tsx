@@ -29,8 +29,8 @@ export default function Slide14GoldenWorkflow({}: SlideProps) {
         </div>
         <div className="step">
           <span className="step-number">05</span>
-          <span className="step-text"><strong>Ask</strong> — итерация</span>
-          <p>Проверь результат. Задай уточняющие вопросы. Новый цикл если нужно</p>
+          <span className="step-text"><strong>Review</strong> — проверка результата</span>
+          <p>Проверь что работает. Задай уточняющие вопросы. Новый цикл если нужно</p>
         </div>
       </div>
     </>

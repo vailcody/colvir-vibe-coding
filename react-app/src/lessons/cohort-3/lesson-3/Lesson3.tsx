@@ -3,10 +3,7 @@ import type { SlideProps } from '../../../components/PresentationShell'
 import type { ComponentType } from 'react'
 
 import Slide01Title from './slides/Slide01Title'
-import Slide02Plan from './slides/Slide02Plan'
-import Slide03Recap from './slides/Slide03Recap'
 import Slide04Workflow from './slides/Slide04Workflow'
-import Slide05Dify from './slides/Slide05Dify'
 import Slide06SettingsGeneral from './slides/Slide06SettingsGeneral'
 import Slide07SettingsAgents from './slides/Slide07SettingsAgents'
 import Slide08SettingsReview from './slides/Slide08SettingsReview'
@@ -28,17 +25,11 @@ import Slide23Subagents from './slides/Slide23Subagents'
 import Slide24Hooks from './slides/Slide24Hooks'
 import Slide25Tokens from './slides/Slide25Tokens'
 import Slide26Breakage from './slides/Slide26Breakage'
-import Slide27BestPractices from './slides/Slide27BestPractices'
 import Slide28Homework from './slides/Slide28Homework'
-import Slide29Next from './slides/Slide29Next'
-import Slide30Summary from './slides/Slide30Summary'
 
 const slides: ComponentType<SlideProps>[] = [
   Slide01Title,
-  Slide02Plan,
-  Slide03Recap,
   Slide04Workflow,
-  Slide05Dify,
   Slide06SettingsGeneral,
   Slide07SettingsAgents,
   Slide08SettingsReview,
@@ -60,10 +51,7 @@ const slides: ComponentType<SlideProps>[] = [
   Slide24Hooks,
   Slide25Tokens,
   Slide26Breakage,
-  Slide27BestPractices,
   Slide28Homework,
-  Slide29Next,
-  Slide30Summary,
 ]
 
 export default function Lesson3Page() {

@@ -1,10 +1,13 @@
 import type { SlideProps } from '../../../../components/PresentationShell'
 
+const BASE = '/cohort-3/lesson-3/'
+
 export default function Slide09SettingsTerminal({}: SlideProps) {
   return (
     <>
       <span className="slide-number reveal">08</span>
       <h2 className="reveal">Настройки: Terminal & Voice</h2>
+      <img src={`${BASE}img/settings-agents-terminal.jpg`} alt="Cursor Settings Terminal" className="slide-image reveal" />
       <ul className="content-list stagger-list">
         <li><strong>Toolbar on Selection</strong> — кнопки «Add to Chat» и «Quick Edit» при выделении кода</li>
         <li><strong>Themed Diff Backgrounds</strong> — цветные фоны для инлайн-диффов</li>

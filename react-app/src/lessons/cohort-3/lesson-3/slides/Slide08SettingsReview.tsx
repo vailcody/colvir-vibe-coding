@@ -1,10 +1,13 @@
 import type { SlideProps } from '../../../../components/PresentationShell'
 
+const BASE = '/cohort-3/lesson-3/'
+
 export default function Slide08SettingsReview({}: SlideProps) {
   return (
     <>
       <span className="slide-number reveal">07</span>
       <h2 className="reveal">Настройки: Review & Context</h2>
+      <img src={`${BASE}img/settings-agents-review.jpg`} alt="Cursor Settings Review" className="slide-image reveal" />
       <ul className="content-list stagger-list">
         <li><strong>Agent Review on Commit</strong> — автоматически проверяет код после каждого коммита. Встроенный code review!</li>
         <li><strong>Include Untracked Files</strong> — включить новые файлы в ревью (ещё не в git)</li>
