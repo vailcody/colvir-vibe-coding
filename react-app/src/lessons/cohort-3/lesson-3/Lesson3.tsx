@@ -22,7 +22,6 @@ import Slide20Context from './slides/Slide20Context'
 import Slide21MCP from './slides/Slide21MCP'
 import Slide22Skills from './slides/Slide22Skills'
 import Slide23Subagents from './slides/Slide23Subagents'
-import Slide24Hooks from './slides/Slide24Hooks'
 import Slide25Tokens from './slides/Slide25Tokens'
 import Slide26Breakage from './slides/Slide26Breakage'
 import Slide28Homework from './slides/Slide28Homework'
@@ -48,7 +47,6 @@ const slides: ComponentType<SlideProps>[] = [
   Slide21MCP,
   Slide22Skills,
   Slide23Subagents,
-  Slide24Hooks,
   Slide25Tokens,
   Slide26Breakage,
   Slide28Homework,
