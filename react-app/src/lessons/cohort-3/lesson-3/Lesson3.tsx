@@ -3,61 +3,67 @@ import type { SlideProps } from '../../../components/PresentationShell'
 import type { ComponentType } from 'react'
 
 import Slide01Title from './slides/Slide01Title'
-import Slide02PlanRecap from './slides/Slide02PlanRecap'
+import Slide02Plan from './slides/Slide02Plan'
 import Slide03Recap from './slides/Slide03Recap'
-import Slide04TodayPlan from './slides/Slide04TodayPlan'
-import Slide05Rules from './slides/Slide05Rules'
-import Slide06SDD from './slides/Slide06SDD'
-import Slide07SDDEvolution from './slides/Slide07SDDEvolution'
-import Slide08SDDTools from './slides/Slide08SDDTools'
-import Slide09OpenSpec from './slides/Slide09OpenSpec'
-import Slide10SDDProposal from './slides/Slide10SDDProposal'
-import Slide11SDDDesign from './slides/Slide11SDDDesign'
-import Slide12SDDTasks from './slides/Slide12SDDTasks'
-import Slide13LiveDemo from './slides/Slide13LiveDemo'
-import Slide14MCPWhat from './slides/Slide14MCPWhat'
-import Slide15MCPArchitecture from './slides/Slide15MCPArchitecture'
-import Slide16MCPTools from './slides/Slide16MCPTools'
-import Slide17MCPResources from './slides/Slide17MCPResources'
-import Slide18MCPPrompts from './slides/Slide18MCPPrompts'
-import Slide19MCPTransport from './slides/Slide19MCPTransport'
-import Slide20MCPSecurity from './slides/Slide20MCPSecurity'
-import Slide21ToolPoisoning from './slides/Slide21ToolPoisoning'
-import Slide22RugPull from './slides/Slide22RugPull'
-import Slide23CommandInjection from './slides/Slide23CommandInjection'
-import Slide24MCPCode from './slides/Slide24MCPCode'
-import Slide25CursorConnect from './slides/Slide25CursorConnect'
-import Slide26Homework from './slides/Slide26Homework'
-import Slide27Summary from './slides/Slide27Summary'
+import Slide04Workflow from './slides/Slide04Workflow'
+import Slide05Dify from './slides/Slide05Dify'
+import Slide06SettingsGeneral from './slides/Slide06SettingsGeneral'
+import Slide07SettingsAgents from './slides/Slide07SettingsAgents'
+import Slide08SettingsReview from './slides/Slide08SettingsReview'
+import Slide09SettingsTerminal from './slides/Slide09SettingsTerminal'
+import Slide10RulesSkills from './slides/Slide10RulesSkills'
+import Slide11MCPTools from './slides/Slide11MCPTools'
+import Slide12Hooks from './slides/Slide12Hooks'
+import Slide13Indexing from './slides/Slide13Indexing'
+import Slide14GoldenWorkflow from './slides/Slide14GoldenWorkflow'
+import Slide15Rules from './slides/Slide15Rules'
+import Slide16RulesPrompt from './slides/Slide16RulesPrompt'
+import Slide17Ask from './slides/Slide17Ask'
+import Slide18Plan from './slides/Slide18Plan'
+import Slide19AgentDebug from './slides/Slide19AgentDebug'
+import Slide20Context from './slides/Slide20Context'
+import Slide21MCP from './slides/Slide21MCP'
+import Slide22Skills from './slides/Slide22Skills'
+import Slide23Subagents from './slides/Slide23Subagents'
+import Slide24Hooks from './slides/Slide24Hooks'
+import Slide25Tokens from './slides/Slide25Tokens'
+import Slide26Breakage from './slides/Slide26Breakage'
+import Slide27BestPractices from './slides/Slide27BestPractices'
+import Slide28Homework from './slides/Slide28Homework'
+import Slide29Next from './slides/Slide29Next'
+import Slide30Summary from './slides/Slide30Summary'
 
 const slides: ComponentType<SlideProps>[] = [
   Slide01Title,
-  Slide02PlanRecap,
+  Slide02Plan,
   Slide03Recap,
-  Slide04TodayPlan,
-  Slide05Rules,
-  Slide06SDD,
-  Slide07SDDEvolution,
-  Slide08SDDTools,
-  Slide09OpenSpec,
-  Slide10SDDProposal,
-  Slide11SDDDesign,
-  Slide12SDDTasks,
-  Slide13LiveDemo,
-  Slide14MCPWhat,
-  Slide15MCPArchitecture,
-  Slide16MCPTools,
-  Slide17MCPResources,
-  Slide18MCPPrompts,
-  Slide19MCPTransport,
-  Slide20MCPSecurity,
-  Slide21ToolPoisoning,
-  Slide22RugPull,
-  Slide23CommandInjection,
-  Slide24MCPCode,
-  Slide25CursorConnect,
-  Slide26Homework,
-  Slide27Summary,
+  Slide04Workflow,
+  Slide05Dify,
+  Slide06SettingsGeneral,
+  Slide07SettingsAgents,
+  Slide08SettingsReview,
+  Slide09SettingsTerminal,
+  Slide10RulesSkills,
+  Slide11MCPTools,
+  Slide12Hooks,
+  Slide13Indexing,
+  Slide14GoldenWorkflow,
+  Slide15Rules,
+  Slide16RulesPrompt,
+  Slide17Ask,
+  Slide18Plan,
+  Slide19AgentDebug,
+  Slide20Context,
+  Slide21MCP,
+  Slide22Skills,
+  Slide23Subagents,
+  Slide24Hooks,
+  Slide25Tokens,
+  Slide26Breakage,
+  Slide27BestPractices,
+  Slide28Homework,
+  Slide29Next,
+  Slide30Summary,
 ]
 
 export default function Lesson3Page() {
