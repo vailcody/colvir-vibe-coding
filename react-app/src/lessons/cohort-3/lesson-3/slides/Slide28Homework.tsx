@@ -21,11 +21,6 @@ export default function Slide28Homework({}: SlideProps) {
           <span className="step-text"><strong>Оживить прототип через Plan → Agent</strong></span>
           <p>Верхнеуровневое описание → Plan декомпозирует → Agent выполняет</p>
         </div>
-        <div className="step">
-          <span className="step-number">04</span>
-          <span className="step-text"><strong>Создать skill или hook</strong></span>
-          <p>/create-skill для unit-тестов или hooks.json для автолинта</p>
-        </div>
       </div>
     </>
   )
