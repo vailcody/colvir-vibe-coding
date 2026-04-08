@@ -8,22 +8,22 @@ export default function Slide26Breakage({}: SlideProps) {
       <p className="subtitle reveal">Стратегии выхода из тупика</p>
       <div className="steps">
         <div className="step">
-          <span className="step-number">🔄</span>
+          <span className="step-number">01</span>
           <span className="step-text"><strong>Зацикливание</strong></span>
           <p>Агент исправляет ошибку и создаёт новую. Решение: остановить, описать проблему заново, дать контекст ошибки явно.</p>
         </div>
         <div className="step">
-          <span className="step-number">⏪</span>
+          <span className="step-number">02</span>
           <span className="step-text"><strong>Checkpoint / Restore</strong></span>
           <p>Cursor сохраняет состояние после каждого шага. Откатитесь к рабочему состоянию и попробуйте другой подход.</p>
         </div>
         <div className="step">
-          <span className="step-number">🧹</span>
+          <span className="step-number">03</span>
           <span className="step-text"><strong>Чистый контекст</strong></span>
           <p>Если чат слишком длинный — начните новый. Скопируйте только суть проблемы. Свежий взгляд = свежий результат.</p>
         </div>
         <div className="step">
-          <span className="step-number">🧠</span>
+          <span className="step-number">04</span>
           <span className="step-text"><strong>Человек в цепи</strong></span>
           <p>Не давайте агенту бесконтрольно менять код. Ревью каждого diff, approve по частям. Вы — архитектор, AI — исполнитель.</p>
         </div>
