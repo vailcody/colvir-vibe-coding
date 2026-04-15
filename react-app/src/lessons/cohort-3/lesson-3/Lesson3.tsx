@@ -16,7 +16,6 @@ import SlideGitWorkflow from './slides/SlideGitWorkflow'
 import Slide14GoldenWorkflow from './slides/Slide14GoldenWorkflow'
 import Slide15Rules from './slides/Slide15Rules'
 import Slide16RulesPrompt from './slides/Slide16RulesPrompt'
-import Slide17Ask from './slides/Slide17Ask'
 import Slide18Plan from './slides/Slide18Plan'
 import Slide19AgentDebug from './slides/Slide19AgentDebug'
 import Slide20Context from './slides/Slide20Context'
@@ -42,7 +41,6 @@ const slides: ComponentType<SlideProps>[] = [
   Slide14GoldenWorkflow,
   Slide15Rules,
   Slide16RulesPrompt,
-  Slide17Ask,
   Slide18Plan,
   Slide19AgentDebug,
   Slide20Context,

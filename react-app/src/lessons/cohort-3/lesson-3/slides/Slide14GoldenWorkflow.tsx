@@ -9,13 +9,9 @@ export default function Slide14GoldenWorkflow({}: SlideProps) {
       <div className="flow-diagram reveal" style={{ marginBottom: '2rem' }}>
         <div className="flow-node">Rules</div>
         <span className="flow-arrow">→</span>
-        <div className="flow-node highlighted">Ask</div>
-        <span className="flow-arrow">→</span>
         <div className="flow-node highlighted">Plan</div>
         <span className="flow-arrow">→</span>
         <div className="flow-node highlighted" style={{ background: 'var(--accent)', color: '#fff' }}>Agent</div>
-        <span className="flow-arrow">→</span>
-        <div className="flow-node">Ask</div>
       </div>
       <div className="steps stagger-list">
         <div className="step">
@@ -28,29 +24,15 @@ export default function Slide14GoldenWorkflow({}: SlideProps) {
         <div className="step">
           <span className="step-number">02</span>
           <div>
-            <span className="step-text">Ask — собери контекст</span>
-            <p className="step-desc">Спроси агента о кодовой базе: что замокано, где типы, какая структура</p>
-          </div>
-        </div>
-        <div className="step">
-          <span className="step-number">03</span>
-          <div>
             <span className="step-text">Plan — декомпозиция задачи</span>
             <p className="step-desc">Верхнеуровневое описание → агент разбивает на шаги. Ревью → Build Plan</p>
           </div>
         </div>
         <div className="step">
-          <span className="step-number">04</span>
+          <span className="step-number">03</span>
           <div>
             <span className="step-text">Agent — выполнение</span>
             <p className="step-desc">Агент выполняет план. Ревью каждого diff. Checkpoint → откат если что</p>
-          </div>
-        </div>
-        <div className="step">
-          <span className="step-number">05</span>
-          <div>
-            <span className="step-text">Ask — итерация</span>
-            <p className="step-desc">Проверь результат. Задай уточняющие вопросы. Новый цикл если нужно</p>
           </div>
         </div>
       </div>
