@@ -3,7 +3,7 @@ import type { SlideProps } from '../../../../components/PresentationShell'
 export default function Slide08WhatIsDocker({}: SlideProps) {
   return (
     <>
-      <span className="slide-number reveal">08</span>
+      <span className="slide-number reveal">09</span>
       <h2 className="reveal">Что такое Docker</h2>
 
       <div className="highlight-box reveal">

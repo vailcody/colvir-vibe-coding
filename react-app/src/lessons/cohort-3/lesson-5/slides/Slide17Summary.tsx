@@ -3,7 +3,7 @@ import type { SlideProps } from '../../../../components/PresentationShell'
 export default function Slide17Summary({}: SlideProps) {
   return (
     <>
-      <span className="slide-number reveal">17</span>
+      <span className="slide-number reveal">18</span>
       <h2 className="reveal">Что сегодня разобрали</h2>
 
       <ul className="content-list stagger-list">

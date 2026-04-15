@@ -3,7 +3,7 @@ import type { SlideProps } from '../../../../components/PresentationShell'
 export default function Slide18Homework({}: SlideProps) {
   return (
     <>
-      <span className="slide-number reveal">18</span>
+      <span className="slide-number reveal">19</span>
       <h2 className="reveal">Домашнее задание</h2>
 
       <ul className="content-list stagger-list">

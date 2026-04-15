@@ -8,6 +8,7 @@ import Slide03Block1Title from './slides/Slide03Block1Title'
 import Slide04OldProcess from './slides/Slide04OldProcess'
 import Slide05OldProblems from './slides/Slide05OldProblems'
 import Slide06ScalableApproach from './slides/Slide06ScalableApproach'
+import Slide07PublishWays from './slides/Slide07PublishWays'
 import Slide07Block2Title from './slides/Slide07Block2Title'
 import Slide08WhatIsDocker from './slides/Slide08WhatIsDocker'
 import Slide09DockerConcepts from './slides/Slide09DockerConcepts'
@@ -29,6 +30,7 @@ const slides: ComponentType<SlideProps>[] = [
   Slide04OldProcess,
   Slide05OldProblems,
   Slide06ScalableApproach,
+  Slide07PublishWays,
   Slide07Block2Title,
   Slide08WhatIsDocker,
   Slide09DockerConcepts,

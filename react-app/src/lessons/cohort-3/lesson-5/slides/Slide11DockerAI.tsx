@@ -3,7 +3,7 @@ import type { SlideProps } from '../../../../components/PresentationShell'
 export default function Slide11DockerAI({}: SlideProps) {
   return (
     <>
-      <span className="slide-number reveal">11</span>
+      <span className="slide-number reveal">12</span>
       <h2 className="reveal">Docker для локальных моделей и MCP</h2>
 
       <div className="card-grid reveal">

@@ -3,7 +3,7 @@ import type { SlideProps } from '../../../../components/PresentationShell'
 export default function Slide15SSHKeys({}: SlideProps) {
   return (
     <>
-      <span className="slide-number reveal">15</span>
+      <span className="slide-number reveal">16</span>
       <h2 className="reveal">SSH-ключи</h2>
 
       <div className="steps reveal">

@@ -3,7 +3,7 @@ import type { SlideProps } from '../../../../components/PresentationShell'
 export default function Slide14ServerSecurity({}: SlideProps) {
   return (
     <>
-      <span className="slide-number reveal">14</span>
+      <span className="slide-number reveal">15</span>
       <h2 className="reveal">Безопасность сервера</h2>
 
       <div className="card-grid reveal">

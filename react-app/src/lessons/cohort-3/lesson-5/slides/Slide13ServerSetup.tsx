@@ -3,7 +3,7 @@ import type { SlideProps } from '../../../../components/PresentationShell'
 export default function Slide13ServerSetup({}: SlideProps) {
   return (
     <>
-      <span className="slide-number reveal">13</span>
+      <span className="slide-number reveal">14</span>
       <h2 className="reveal">Покупка сервера и домен</h2>
 
       <div className="steps reveal">

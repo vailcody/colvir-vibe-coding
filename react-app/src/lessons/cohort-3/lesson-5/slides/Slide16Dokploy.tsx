@@ -3,7 +3,7 @@ import type { SlideProps } from '../../../../components/PresentationShell'
 export default function Slide16Dokploy({}: SlideProps) {
   return (
     <>
-      <span className="slide-number reveal">16</span>
+      <span className="slide-number reveal">17</span>
       <h2 className="reveal">Установка Dokploy</h2>
 
       <div className="highlight-box reveal">

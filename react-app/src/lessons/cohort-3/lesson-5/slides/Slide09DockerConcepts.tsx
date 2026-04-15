@@ -3,7 +3,7 @@ import type { SlideProps } from '../../../../components/PresentationShell'
 export default function Slide09DockerConcepts({}: SlideProps) {
   return (
     <>
-      <span className="slide-number reveal">09</span>
+      <span className="slide-number reveal">10</span>
       <h2 className="reveal">Три ключевые сущности</h2>
 
       <div className="card-row reveal">
