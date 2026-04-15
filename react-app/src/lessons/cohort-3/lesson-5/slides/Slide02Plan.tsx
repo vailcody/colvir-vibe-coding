@@ -6,43 +6,20 @@ export default function Slide02Plan({}: SlideProps) {
       <span className="slide-number reveal">02</span>
       <h2 className="reveal">План занятия</h2>
 
-      <div className="plan-blocks reveal">
-        <div className="plan-block">
-          <div className="plan-block-header">
-            <span className="plan-block-num">01</span>
-            <h3>Масштабируемая разработка</h3>
-          </div>
-          <ul>
-            <li>Как было раньше</li>
-            <li>Почему ручной деплой не работает</li>
-            <li>Современный подход: ветки и автодеплой</li>
-          </ul>
+      <div className="card-row reveal" style={{ marginTop: '2rem' }}>
+        <div className="card highlighted">
+          <h3>01 Масштабируемая разработка</h3>
+          <p>Как было раньше, почему это не масштабируется, современный подход.</p>
         </div>
 
-        <div className="plan-block">
-          <div className="plan-block-header">
-            <span className="plan-block-num">02</span>
-            <h3>Докер</h3>
-          </div>
-          <ul>
-            <li>Что такое Докер и зачем он нужен</li>
-            <li>Контейнеры, образы, тома</li>
-            <li>Работа с Докер локально</li>
-            <li>Локальные модели и MCP</li>
-          </ul>
+        <div className="card">
+          <h3>02 Docker</h3>
+          <p>Что это такое, как работает, образ, контейнер, том, локальная работа.</p>
         </div>
 
-        <div className="plan-block">
-          <div className="plan-block-header">
-            <span className="plan-block-num">03</span>
-            <h3>Сервер и безопасность</h3>
-          </div>
-          <ul>
-            <li>Покупка сервера и настройка домена</li>
-            <li>Безопасность через Warp Agent</li>
-            <li>SSH-ключи</li>
-            <li>Установка Dokploy</li>
-          </ul>
+        <div className="card">
+          <h3>03 Сервер и безопасность</h3>
+          <p>Покупка сервера, первое подключение, безопасность, SSH-ключи, Dokploy.</p>
         </div>
       </div>
     </>

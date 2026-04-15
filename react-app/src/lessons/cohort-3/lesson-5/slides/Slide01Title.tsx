@@ -6,8 +6,8 @@ export default function Slide01Title({}: SlideProps) {
       <div className="geo-square" style={{ width: 120, height: 120, bottom: '10%', right: '15%', opacity: 0.15 }} />
       <div className="geo-line" style={{ width: 200, height: 3, top: '20%', right: '8%' }} />
       <div className="geo-outline" style={{ width: 80, height: 80, top: '15%', right: '5%' }} />
-      <h1 className="reveal">Докер и сервер</h1>
-      <p className="subtitle reveal">Занятие 5: Масштабируемая разработка, контейнеризация и деплой</p>
+      <h1 className="reveal">Вайб-кодинг</h1>
+      <p className="subtitle reveal">Занятие 5: масштабируемая разработка, Docker, сервер и безопасность</p>
       <p className="meta reveal">Вайб-кодинг по Чуйкову · 3-й поток · 2026</p>
     </>
   )

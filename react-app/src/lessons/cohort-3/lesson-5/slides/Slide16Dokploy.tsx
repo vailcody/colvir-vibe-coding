@@ -7,7 +7,7 @@ export default function Slide16Dokploy({}: SlideProps) {
       <h2 className="reveal">Установка Dokploy</h2>
 
       <div className="highlight-box reveal">
-        <p>Dokploy — бесплатная open-source платформа для деплоя. Веб-интерфейс для управления Докер-контейнерами и автодеплоя из Git.</p>
+        <p>Dokploy, бесплатная open-source платформа для деплоя. Веб-интерфейс для управления Docker-контейнерами и автодеплоя из Git.</p>
       </div>
 
       <div className="steps reveal" style={{ marginTop: '1.5rem' }}>
@@ -15,7 +15,7 @@ export default function Slide16Dokploy({}: SlideProps) {
           <div className="step-number">01</div>
           <div>
             <div className="step-text">Установка</div>
-            <div className="step-desc">Один скрипт на чистом сервере с Докер. Автоматически поднимает панель управления</div>
+            <div className="step-desc">Один скрипт на чистом сервере с Docker. Автоматически поднимает панель управления</div>
           </div>
         </div>
         <div className="step">
@@ -35,8 +35,8 @@ export default function Slide16Dokploy({}: SlideProps) {
         <div className="step">
           <div className="step-number">04</div>
           <div>
-            <div className="step-text">Деплой</div>
-            <div className="step-desc">Push в Git → автоматическая сборка и запуск. Откат при ошибке в один клик</div>
+            <div className="step-text">Сегодня</div>
+            <div className="step-desc">Сегодня ставим Dokploy. Детальную настройку деплоя и конфигурации разберём на следующем занятии</div>
           </div>
         </div>
       </div>

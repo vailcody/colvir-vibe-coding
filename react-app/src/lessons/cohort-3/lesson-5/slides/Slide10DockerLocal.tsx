@@ -4,7 +4,7 @@ export default function Slide10DockerLocal({}: SlideProps) {
   return (
     <>
       <span className="slide-number reveal">10</span>
-      <h2 className="reveal">Докер на компьютере</h2>
+      <h2 className="reveal">Docker на компьютере</h2>
 
       <div className="steps reveal">
         <div className="step">
@@ -32,7 +32,7 @@ export default function Slide10DockerLocal({}: SlideProps) {
           <div className="step-number">04</div>
           <div>
             <div className="step-text">Публикация</div>
-            <div className="step-desc">Тот же образ разворачивается на любом сервере с Докер без изменений</div>
+            <div className="step-desc">Тот же образ разворачивается на любом сервере с Docker без изменений</div>
           </div>
         </div>
       </div>

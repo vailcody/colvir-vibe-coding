@@ -7,11 +7,8 @@ export default function Slide18Homework({}: SlideProps) {
       <h2 className="reveal">Домашнее задание</h2>
 
       <ul className="content-list stagger-list">
-        <li>Установить Docker Desktop на свой компьютер</li>
-        <li>Запустить свой первый контейнер: docker run hello-world</li>
-        <li>Упаковать свой проект в Dockerfile и запустить локально</li>
-        <li>Сгенерировать SSH-ключ и настроить доступ к своему серверу</li>
-        <li>Установить Dokploy и подключить GitHub-репозиторий</li>
+        <li>Упаковать свой проект в Docker</li>
+        <li>Запустить его локально в контейнере</li>
       </ul>
     </>
   )

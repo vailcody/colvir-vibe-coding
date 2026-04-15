@@ -4,21 +4,21 @@ export default function Slide11DockerAI({}: SlideProps) {
   return (
     <>
       <span className="slide-number reveal">11</span>
-      <h2 className="reveal">Докер для ИИ</h2>
+      <h2 className="reveal">Docker для локальных моделей и MCP</h2>
 
       <div className="card-grid reveal">
         <div className="card highlighted">
           <h3>Локальные модели</h3>
-          <p>Запускайте LLM на своём компьютере через Docker-контейнеры: Ollama, llama.cpp, vLLM. Данные не уходят наружу.</p>
+          <p>Через Docker можно запускать локальные модели на своём компьютере. Данные остаются у тебя.</p>
         </div>
         <div className="card">
           <h3>MCP-серверы</h3>
-          <p>Model Context Protocol — стандарт подключения инструментов к ИИ-агентам. Докер упрощает запуск и настройку MCP-серверов.</p>
+          <p>MCP-серверы тоже удобно поднимать через Docker, чтобы быстро запускать и не ловить конфликты окружения.</p>
         </div>
       </div>
 
       <div className="highlight-box reveal" style={{ marginTop: '1.5rem' }}>
-        <p>Докер — универсальный способ запускать что угодно: от веб-приложений до ИИ-моделей, с гарантированно одинаковым результатом.</p>
+        <p>Один и тот же способ подходит и для приложений, и для локальных моделей, и для MCP-серверов.</p>
       </div>
     </>
   )
